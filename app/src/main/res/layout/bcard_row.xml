@@ -1,0 +1,347 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="2dp">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/image_test_for_business_cards"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:adjustViewBounds="true"
+            android:scaleType="centerCrop"
+            android:src="@drawable/card_background"/>
+
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/bcard_logo"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:src="@drawable/company_logo"
+
+            android:layout_gravity="bottom|left"
+            android:layout_margin="25dp"
+            app:civ_border_width="4dp"
+            app:civ_border_color="#ffffff"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_margin="5dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:gravity="start"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="#000000"
+                    android:textColor="#ffffff"
+                    android:gravity="center|left"
+                    android:text="Name:"
+                    android:layout_margin="5dp"
+                    android:padding="3dp"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    />
+                <TextView
+                    android:id="@+id/bcard_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="#000000"
+                    android:textColor="#ffffff"
+                    android:gravity="center|left"
+                    android:layout_margin="5dp"
+                    android:padding="3dp"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_gravity="start"
+                android:gravity="start"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="#000000"
+                    android:text="Company Name:"
+                    android:textColor="#ffffff"
+                    android:layout_margin="5dp"
+                    android:padding="3dp"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    />
+                <TextView
+                    android:id="@+id/bcard_comapny_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="#000000"
+                    android:textColor="#ffffff"
+                    android:layout_margin="5dp"
+                    android:padding="3dp"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:gravity="start"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="#000000"
+                    android:text="Post:"
+                    android:textColor="#ffffff"
+                    android:layout_margin="5dp"
+                    android:padding="3dp"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    />
+                <TextView
+                    android:id="@+id/bcard_comapny_post"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="#000000"
+                    android:textColor="#ffffff"
+                    android:layout_margin="5dp"
+                    android:padding="3dp"
+                    android:textAppearance="?android:attr/textAppearanceSmall"/>
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:gravity="end">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="#000000"
+                    android:textColor="#ffffff"
+                    android:text="Company line:"
+                    android:layout_margin="5dp"
+                    android:padding="3dp"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:layout_gravity="right" />
+                <TextView
+                    android:id="@+id/bcard_phone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#ffffff"
+                    android:background="#000000"
+                    android:layout_margin="5dp"
+                    android:padding="3dp"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:layout_gravity="right" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:gravity="end">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#ffffff"
+                    android:background="#000000"
+                    android:layout_margin="5dp"
+                    android:padding="3dp"
+                    android:text="Email:"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:layout_gravity="right" />
+
+                <TextView
+                    android:id="@+id/bcard_email"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#ffffff"
+                    android:background="#000000"
+                    android:layout_margin="5dp"
+                    android:padding="3dp"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:layout_gravity="right" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:gravity="end">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="#000000"
+                    android:textColor="#ffffff"
+                    android:text="Website:"
+                    android:layout_margin="5dp"
+                    android:padding="3dp"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:layout_gravity="right" />
+
+                <TextView
+                    android:id="@+id/bcard_website"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="#000000"
+                    android:textColor="#ffffff"
+                    android:layout_margin="5dp"
+                    android:padding="3dp"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:layout_gravity="right" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:gravity="end">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#ffffff"
+                    android:background="#000000"
+                    android:layout_margin="5dp"
+                    android:padding="3dp"
+                    android:text="Direct Line:"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:layout_gravity="right" />
+
+                <TextView
+                    android:id="@+id/bcard_direct_phone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#ffffff"
+                    android:background="#000000"
+                    android:layout_margin="5dp"
+                    android:padding="3dp"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:layout_gravity="right" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:gravity="end">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="#000000"
+                    android:text="Street:"
+                    android:textColor="#ffffff"
+                    android:layout_margin="5dp"
+                    android:padding="3dp"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:layout_gravity="right" />
+                <TextView
+                    android:id="@+id/bcard_street"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="#000000"
+                    android:textColor="#ffffff"
+                    android:layout_margin="5dp"
+                    android:padding="3dp"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:layout_gravity="right" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:gravity="end">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="#000000"
+                    android:text="City:"
+                    android:textColor="#ffffff"
+                    android:layout_margin="5dp"
+                    android:padding="3dp"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:layout_gravity="right" />
+                <TextView
+                    android:id="@+id/bcard_city"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="#000000"
+                    android:textColor="#ffffff"
+                    android:layout_margin="5dp"
+                    android:padding="3dp"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:layout_gravity="right" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:gravity="end">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="#000000"
+                    android:text="State:"
+                    android:textColor="#ffffff"
+                    android:layout_margin="5dp"
+                    android:padding="3dp"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:layout_gravity="right" />
+                <TextView
+                    android:id="@+id/bcard_state"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="#000000"
+                    android:textColor="#ffffff"
+                    android:layout_margin="5dp"
+                    android:padding="3dp"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:layout_gravity="right" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:gravity="end">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="#000000"
+                    android:text="ZipCode:"
+                    android:textColor="#ffffff"
+                    android:layout_margin="5dp"
+                    android:padding="3dp"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:layout_gravity="right" />
+                <TextView
+                    android:id="@+id/bcard_zip_code"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="#000000"
+                    android:textColor="#ffffff"
+                    android:layout_margin="5dp"
+                    android:padding="3dp"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:layout_gravity="right" />
+                </LinearLayout>
+        </LinearLayout>
+    </FrameLayout>
+</LinearLayout>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/nav_header_height"
+    android:background="#000000"
+    android:gravity="center"
+
+
+    android:id="@+id/nav_header_main_id"
+
+    android:theme="@style/ThemeOverlay.AppCompat.Dark">
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <com.flaviofaria.kenburnsview.KenBurnsView
+        android:id="@+id/image_navigation_drawer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:adjustViewBounds="true"
+        android:background="@color/purple"
+        android:src="@drawable/card_background" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Hi you"
+                android:id="@+id/text_navigation_drawer"
+                android:textSize="16sp"
+                android:textColor="#ffffff"
+                android:background="@color/blue_grey_800"
+                android:layout_gravity="bottom|right"
+                android:layout_marginBottom="15dp"
+                android:layout_marginRight="15dp"
+                android:padding="4dp"
+                />
+
+
+        </FrameLayout>
+
+</LinearLayout>

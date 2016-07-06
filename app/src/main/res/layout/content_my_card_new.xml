@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    xmlns:custom="http://schemas.android.com/tools"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.project.businesscardexchange.MyCardActivity"
+    tools:showIn="@layout/activity_my_card"
+    android:id="@+id/nested_scroll_view_id">
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/card_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="0dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="10dp"
+        app:cardCornerRadius="2dp"
+        app:cardElevation="4dp"
+        app:cardPreventCornerOverlap="false"
+        app:contentPadding="0dp"
+       >
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/blue_200"
+           >
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/content_top"
+                android:weightSum="7"
+                android:orientation="horizontal"
+                >
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="4"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                >
+                <TextView
+                    android:id="@+id/mycardactivity_name"
+                   style="@style/MyTextViewStyle"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    />
+                <TextView
+                    android:id="@+id/mycardactivity_comapny_name"
+                    style="@style/MyTextViewStyle"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+
+                    />
+                <TextView
+                    android:id="@+id/mycardactivity_post"
+                    style="@style/MyTextViewStyle"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    />
+
+            </LinearLayout>
+
+                <ImageView
+                    xmlns:app="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/image_company_logo"
+                    android:layout_width="0dp"
+                    android:layout_weight="3"
+                    android:layout_height="fill_parent"
+                    android:src="@mipmap/background"
+                    android:layout_gravity="bottom|right"
+                    android:layout_margin="8dp"
+                    />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/content_top"
+                android:id="@+id/content_middle"
+                android:weightSum="7"
+                android:orientation="horizontal"
+                >
+                <com.flaviofaria.kenburnsview.KenBurnsView
+                    android:layout_gravity="center"
+                    android:layout_width="0dp"
+                    android:layout_weight="3"
+                    android:layout_height="fill_parent"
+                    android:adjustViewBounds="true"
+                    android:scaleType="centerCrop"
+                    android:background="@color/purple"
+                    android:id="@+id/image_test"
+                    />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="4"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                >
+
+                <TextView
+                    android:id="@+id/mycardactivity_website"
+                    style="@style/MyTextViewStyle"
+                    android:textColor="@color/blue_400"
+
+                    android:layout_gravity="right" />
+
+                <TextView
+                    android:id="@+id/mycardactivity_phone"
+                    style="@style/MyTextViewStyle"
+
+                    android:layout_gravity="right" />
+                <TextView
+                    android:id="@+id/mycardactivity_direct_line"
+                    style="@style/MyTextViewStyle"
+
+                    android:layout_gravity="right" />
+                <TextView
+                    android:id="@+id/mycardactivity_email"
+                    style="@style/MyTextViewStyle"
+android:textColor="@color/blue_400"
+                    android:layout_gravity="right" />
+                </LinearLayout>
+                </LinearLayout>
+            <LinearLayout
+                android:layout_below="@+id/content_middle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:orientation="vertical"
+                android:layout_marginTop="5dp"
+                >
+                <TextView
+                    android:id="@+id/sddress"
+                    style="@style/MyTextViewStyle"
+android:text="Address:"
+                    android:layout_gravity="center_horizontal"
+                    android:textColor="@color/red"
+                    android:visibility="gone"
+                    />
+
+
+                <TextView
+                    android:id="@+id/mycardactivity_street"
+                    style="@style/MyTextViewStyle"
+                    android:layout_gravity="right" />
+                <TextView
+                    android:id="@+id/mycardactivity_city"
+                    style="@style/MyTextViewStyle"
+
+                    android:layout_gravity="right" />
+                <TextView
+                    android:id="@+id/mycardactivity_zip_code"
+                    style="@style/MyTextViewStyle"
+                    android:layout_gravity="right"
+                    android:visibility="gone"
+                    />
+                <TextView
+                    android:id="@+id/mycardactivity_state"
+                    style="@style/MyTextViewStyle"
+                    android:layout_gravity="right"
+                    android:visibility="gone"
+                    />
+
+            </LinearLayout>
+        </RelativeLayout>
+
+   </android.support.v7.widget.CardView>
+
+</android.support.v4.widget.NestedScrollView>

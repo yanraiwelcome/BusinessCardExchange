@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.project.businesscardexchange.MainActivity"
+    tools:showIn="@layout/app_bar_main"
+    xmlns:ebm="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main_activity_container"
+    xmlns:htext="http://schemas.android.com/apk/res-auto">
+
+
+        <com.flaviofaria.kenburnsview.KenBurnsView
+            android:layout_gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/backgorun_colory"
+            android:adjustViewBounds="true"
+            android:scaleType="centerCrop"
+
+             />
+    <com.romainpiel.shimmer.ShimmerTextView
+        android:id="@+id/shimmer_tv"
+        android:text="E-BIZCARDX"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#004276"
+        android:textSize="30sp"
+        android:gravity="center"
+        android:layout_centerInParent="true"/>
+
+
+    <lt.lemonlabs.android.expandablebuttonmenu.ExpandableMenuOverlay
+        android:id="@+id/button_menu"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+
+        android:src="@mipmap/up_button"
+        ebm:closeButtonSrc="@mipmap/down_button"
+        ebm:leftButtonSrc="@mipmap/button_show_my_card"
+        ebm:midButtonSrc="@mipmap/button_create_card"
+        ebm:rightButtonSrc="@mipmap/button_show_cards"
+        ebm:leftButtonText="@string/action_left"
+        ebm:midButtonText="@string/action_mid"
+        ebm:rightButtonText="@string/action_right"
+        ebm:distanceY="0.35"
+    ebm:distanceX="0.30"
+    ebm:bottomPad="0.08"
+
+        />
+
+
+</RelativeLayout>

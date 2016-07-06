@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_home"
+            android:icon="@mipmap/ic_home_grey600_36dp"
+            android:title="Home" />
+        <item
+            android:id="@+id/nav_create_business_card"
+            android:icon="@mipmap/ic_account_box_grey600_36dp"
+            android:title="Create Business Card" />
+        <item
+            android:id="@+id/nav_my_card"
+            android:icon="@mipmap/ic_dashboard_grey600_36dp"
+            android:title="My Card" />
+        <item
+            android:id="@+id/nav_business_cards"
+            android:icon="@mipmap/ic_reorder_grey600_36dp"
+            android:title="Business Cards" />
+    </group>
+
+    <item android:title="Communicate">
+        <menu>
+            <item
+                android:id="@+id/nav_share"
+                android:icon="@drawable/ic_menu_share"
+                android:title="Share" />
+            <item
+                android:id="@+id/nav_send"
+                android:icon="@drawable/ic_menu_send"
+                android:title="About" />
+        </menu>
+    </item>
+
+</menu>

@@ -1,0 +1,75 @@
+<resources>
+
+    <string name="app_name">BusinessCardExchange</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_profile">ProfileActivity</string>
+
+    <string name="title_activity_my_card">My Business Card</string>
+    <string name="title_activity_business_cards">BUSINESS CARDS</string>
+    <string name="large_text">
+        "Material is the metaphor.\n\n"
+    </string>
+    <string name="title_activity_cards">BUSINESS CARDS</string>
+    <string name="action_left">My Card</string>
+    <string name="action_mid">Create your card</string>
+    <string name = "action_right">Business cards</string>
+
+
+    <string name="menu_about">About</string>
+    <string name="menu_history">History</string>
+
+    <string name="setting_illustrate">Illustrate</string>
+    <string name="setting_action">Action</string>
+
+    <string name="main_i_want_send">I want send</string>
+    <string name="main_i_want_receive">I want receive</string>
+    <string name="main_i_file_2_PC">File to PC</string>
+    <string name="main_name_hint">Menu Name</string>
+
+    <string name="title_radar_scan">Waiting For Receiver</string>
+
+    <string name="wifi_hotspot_fail">Hotspot Fail</string>
+    <string name="wifi_hotspot_creating">Creating Hotspot</string>
+
+    <string name="file_select">Select File</string>
+    <string name="picture">Picture</string>
+    <!--<string name="app">App</string>-->
+    <string name="card">Cards</string>
+
+    <string name="send_connect_to">Send connect to： %s </string>
+
+    <string name="please_select_file">Please select file</string>
+    <string name="title_activity_file_transfering">File Transferring</string>
+    <string name="file_transfering_exit">Exit File Transfer？</string>
+    <string name="ok">Ok</string>
+    <string name="send_abort_self">Send %s </string>
+    <string name="file_send_complete">File Sent Completed</string>
+    <string name="file_has_completed">File has conpleted</string>
+    <string name="file_wait">Wait...</string>
+    <string name="file_sending">Sending Files</string>
+    <string name="file_receiving">Receiving Files</string>
+    <string name="file_receive_completed">File Receive completed</string>
+
+    <string name="about_use">Use</string>
+    <string name="about_use_content"></string>
+    <string name="about_thanks">Thanks</string>
+    <string name="about_thanks_content">Thanks to University</string>
+
+    <string name="about_library">Library</string>
+    <string name="about_library_content">com.android.support:support-v4:22.2.0\ncom.android.support:appcompat-v7:22.2.0\ncom.android.support:design:22.2.0\ncom.android.support:recyclerview-v7:22.+\ncom.android.support:cardview-v7:22.0.0\ncom.github.bumptech.glide:glide:3.5.2\nRadarScanView\nrandomtextview\nrippleview\nrippleoutlayout\np2pmanager\nhttpServer\n</string>
+
+    <string name="about_receive_path">Receive path</string>
+
+    <string name="no_received_content">No content Received...</string>
+    <string name="all_rights_reserved">Copyright © 2012-2016 Prabin. All Rights Reserved.</string>
+    <!--<string name="required_permissions_promo">We needs permission to Storage.</string>
+    <string name="enable_permission_procedure"><![CDATA[You can change permissions in Settings > Apps > I > Permissions.]]></string>-->
+    <string name="enable_permission_procedure">"Enable Permission> > 。"</string>
+    <string name="required_permissions_promo">"Required Permission。"</string>
+    <string name="file_not_found">Sorry, file was deleted or not exist</string>
+    <string name="send_to">Share To</string>
+</resources>

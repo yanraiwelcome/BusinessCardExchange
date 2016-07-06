@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+   <!-- <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>-->
+
+
+    <color name="text_primary">#333333</color>
+    <color name="text_secondary">#999999</color>
+    <color name="text_dialog">#666666</color>
+    <color name="edittext_hint">#cccccc</color>
+
+    <!-- default colors -->
+    <color name="transparent">#00000000</color>
+    <color name="white">#ffffffff</color>
+    <color name="black">#000000</color>
+    <color name="gray">#999999</color>
+    <color name="dkgray">#444444</color>
+    <color name="ltgray">#cccccc</color>
+    <color name="green">#28b67f</color>
+    <color name="purple">#f22020</color>
+    <color name="cyan">#00ffff</color>
+    <color name="yellow">#FF4E2C</color>
+    <color name="orange">#FFA02F</color>
+    <color name="blue">#007AFF</color>
+    <color name="ltblue">#ffedf9fd</color>
+    <color name="red">#f64c3a</color>
+    <color name="gray_overlay">#66000000</color>
+
+
+
+    <color name="colorPrimaryDark">#003661</color>
+    <color name="colorAccent">#c90632</color>
+    <!--for views colors-->
+    <color name="green_teal">#009688</color>
+    <color name="lime">#CDDC39</color>
+    <!--views colors-->
+
+    <!--for android theme-->
+    <color name="accent">#303F9F</color>
+    <color name="primary">#303F9F</color>
+    <color name="primary_dark">#303F9F</color>
+    <color name="primary_text">#212121</color>
+    <color name="secondary_text">#727272</color>
+
+    <color name="buttonColor">#536dfe</color>
+
+    <color name="light_black">#747474</color>
+    <color name="google">#C6412C</color>
+    <color name="grey">#EDEEEF</color>
+    <color name="dark_green">#388E3C</color>
+
+    <color name="dark_grey">#AEAEAE</color>
+
+</resources>

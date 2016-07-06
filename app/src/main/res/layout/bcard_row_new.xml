@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView android:id="@+id/card_view"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="0dp"
+    android:layout_marginLeft="5dp"
+    android:layout_marginRight="5dp"
+    android:layout_marginTop="10dp"
+    app:cardCornerRadius="2dp"
+    app:cardElevation="4dp"
+    app:cardPreventCornerOverlap="false"
+    app:contentPadding="0dp"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+android:background="@color/blue_200"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/content_top"
+            android:weightSum="7"
+            android:orientation="horizontal"
+            >
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="4"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                >
+                <TextView
+                    android:id="@+id/bcard_name"
+                    style="@style/MyTextViewStyle"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    />
+                <TextView
+                    android:id="@+id/bcard_comapny_name"
+                    style="@style/MyTextViewStyle"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    />
+                <TextView
+                    android:id="@+id/bcard_comapny_post"
+                    style="@style/MyTextViewStyle"
+                    android:textAppearance="?android:attr/textAppearanceLarge"/>
+
+            </LinearLayout>
+
+            <ImageView
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/bcard_logo"
+                android:layout_width="0dp"
+                android:layout_weight="3"
+                android:layout_height="fill_parent"
+                android:src="@mipmap/background"
+
+                android:layout_gravity="bottom|left"
+                android:layout_margin="8dp"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/content_top"
+            android:id="@+id/content_middle"
+            android:weightSum="7"
+            android:orientation="horizontal"
+            >
+            <com.flaviofaria.kenburnsview.KenBurnsView
+                android:layout_gravity="center"
+                android:layout_width="0dp"
+                android:layout_weight="3"
+                android:layout_height="fill_parent"
+                android:adjustViewBounds="true"
+                android:scaleType="centerCrop"
+                android:background="@color/purple"
+                android:id="@+id/image_test_for_business_cards" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="4"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                >
+
+                <TextView
+                    android:id="@+id/bcard_website"
+                    style="@style/MyTextViewStyle"
+                    android:layout_gravity="right"
+                    android:textColor="@color/blue_A400"
+                    />
+
+                <TextView
+                    android:id="@+id/bcard_phone"
+                    style="@style/MyTextViewStyle"
+                    android:layout_gravity="right"/>
+                <TextView
+                    android:id="@+id/bcard_direct_phone"
+                    style="@style/MyTextViewStyle"
+                    android:layout_gravity="right" />
+                <TextView
+                    android:id="@+id/bcard_email"
+                    style="@style/MyTextViewStyle"
+                    android:textColor="@color/blue_A400"
+
+                    android:layout_gravity="right"/>
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/address_section"
+                    android:layout_gravity="center_horizontal"
+                    >
+                <TextView
+
+                    android:id="@+id/sddress"
+                    style="@style/MyTextViewStyle"
+                    android:text="Address:"
+                    android:layout_gravity="right"
+                    android:textColor="@color/red"
+                    android:visibility="gone"
+                    />
+                <TextView
+                    android:layout_below="@+id/sddress"
+                    android:id="@+id/bcard_street"
+                    style="@style/MyTextViewStyle"
+                    android:layout_gravity="right"  />
+
+                <TextView
+                    android:layout_below="@+id/bcard_street"
+                    android:id="@+id/bcard_city"
+                    style="@style/MyTextViewStyle"
+                    android:layout_gravity="right"  />
+                    <TextView
+                        android:layout_below="@+id/bcard_city"
+                        android:id="@+id/bcard_state"
+                        style="@style/MyTextViewStyle"
+                        android:layout_gravity="right"
+                        android:visibility="gone"
+                        />
+                <TextView
+                    android:layout_below="@+id/bcard_city"
+                    android:id="@+id/bcard_zip_code"
+                    style="@style/MyTextViewStyle"
+                    android:layout_gravity="right"
+                    android:visibility="gone"
+                    />
+                </RelativeLayout>
+
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_below="@+id/content_middle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:orientation="vertical"
+            android:layout_marginTop="5dp"
+            >
+
+
+
+        </LinearLayout>
+    </RelativeLayout>
+
+</android.support.v7.widget.CardView>
