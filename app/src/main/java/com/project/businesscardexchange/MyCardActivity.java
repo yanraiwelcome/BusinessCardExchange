@@ -1,28 +1,48 @@
 package com.project.businesscardexchange;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Paint;
 import android.net.Uri;
+import android.nfc.NdefMessage;
+import android.nfc.NfcAdapter;
+import android.nfc.NfcEvent;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
+import android.telephony.PhoneNumberUtils;
 import android.util.Base64;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.flaviofaria.kenburnsview.KenBurnsView;
+import com.guo.duoduo.p2pmanager.p2pconstant.P2PConstant;
+import com.guo.duoduo.p2pmanager.p2pentity.P2PFileInfo;
 import com.project.businesscardexchange.models.BusinessCard;
+import com.project.businesscardexchange.sdk.cache.Cache;
+import com.project.businesscardexchange.ui.transfer.RadarScanActivity;
+import com.project.businesscardexchange.ui.transfer.fragment.CardFragment;
+import com.project.businesscardexchange.ui.uientity.CardInfo;
 import com.project.businesscardexchange.utils.DBHelper;
+import com.project.businesscardexchange.utils.ToastUtils;
 
 import net.frederico.showtipsview.ShowTipsBuilder;
 import net.frederico.showtipsview.ShowTipsView;
+
+import java.io.File;
 
 //import io.realm.Realm;
 
@@ -107,19 +127,107 @@ public class MyCardActivity extends AppCompatActivity {
             e.fillInStackTrace();
         }
 
-      //  dotProgressBar = (DotProgressBar)findViewById(R.id.dot_progress_bar_1);
+        CardView myCard = (CardView) findViewById(R.id.card_view);
+        myCard.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(MyCardActivity.this);
+                builder.setTitle("Choose Action:");
+                builder.setItems(new CharSequence[]
+                                {"Share", "Send to NFC", "Send to wifi"},
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
 
+                                // The 'which' argument contains the index position
+                                // of the selected item
+                                //   RealmResults<BusinessCardRealm> results = myRealm.where(BusinessCardRealm.class).findAll();
+                                //   results.sort("name");
+                                final BusinessCard b = myOwn;//bizCardLists.get(position);
+
+                                switch (which) {
+                                    case 0:
+                                        String inputPath = Environment.getExternalStoragePublicDirectory(MyApplication.getCardRootLocationDir()) + File.separator + MyApplication.ZIP_DIRECTORY_NAME;
+                                        // Log.d(tag,"inputPath:"+inputPath);
+                                        File file = new File(inputPath + b.getTimestamp() + ".zip");
+                                        //  Log.d(tag,"filePath:"+file.getAbsolutePath());
+                                        if (file.exists()) {
+                                            String zipName = b.getTimestamp();
+                                            Intent shareIntent = new Intent();
+                                            shareIntent.setAction(Intent.ACTION_SEND);
+                                            shareIntent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(new File(zipName)));
+                                            shareIntent.setType("*/*");
+                                            startActivity(Intent.createChooser(shareIntent, getResources().getText(R.string.send_to)));
+                                        } else {
+                                            Toast.makeText(getApplicationContext(), "Can not share 1:" + b.getName(), Toast.LENGTH_SHORT).show();
+                                        }
+
+                                        break;
+                                    case 1:
+                                        // Toast.makeText(getApplicationContext(), "clicked 2:"+b.getName(), Toast.LENGTH_SHORT).show();
+                                        //  Toast.makeText(CardsActivity.this, "share", Toast.LENGTH_SHORT).show();
+//                                Intent intent = new Intent(Intent.ACTION_SEND, Uri.parse("tel:"));
+//                                startActivity(intent);
+                                        try {
+
+                                            NfcAdapter nfcAdapter = NfcAdapter.getDefaultAdapter(MyCardActivity.this);
+                                            assert nfcAdapter != null;
+                                            nfcAdapter.setNdefPushMessageCallback(
+                                                    new NfcAdapter.CreateNdefMessageCallback() {
+                                                        public NdefMessage createNdefMessage(NfcEvent event) {
+                                                            return new NFCService(getApplicationContext(), 0, b).createMessage();
+                                                        }
+                                                    }, MyCardActivity.this);
+                                        } catch (Exception e) {
+                                            Toast.makeText(getApplicationContext(), "NFC ERROR ", Toast.LENGTH_LONG).show();
+                                        }
+
+                                        break;
+                                    case 2:
+                                        //Toast.makeText(getApplicationContext(), "clicked 3:"+b.getName(), Toast.LENGTH_SHORT).show();
+                                       /* Intent gotoWifi = new Intent(CardsActivity.this, com.project.businesscardexchange.ui.main.MainActivity.class);
+                                        gotoWifi.putExtra("type","shareCard");
+                                        //gotoWifi.putExtra("card",b);
+                                        startActivity(gotoWifi);*/
+                                        CardInfo info = CardFragment.getCardInfo(b);
+                                        try {
+                                            P2PFileInfo fileInfo = new P2PFileInfo();
+                                            fileInfo.name = info.getFileName();
+                                            fileInfo.type = P2PConstant.TYPE.APP;
+                                            fileInfo.size = new File(info.getFilePath()).length();
+                                            fileInfo.path = info.getFilePath();
+                                            Cache.selectedList.add(fileInfo);
+                                        } catch (Exception e) {
+                                            Log.e("ErrorWifi", "Do cache:" + e.getLocalizedMessage());
+                                        }
+                                        if (Cache.selectedList.size() > 0)
+                                            startActivity(new Intent(MyCardActivity.this,
+                                                    RadarScanActivity.class).putExtra("name", Build.DEVICE));
+                                        else
+                                            ToastUtils.showTextToast(getApplicationContext(),
+                                                    getString(R.string.file_not_found));
+                                        break;
+                                }
+                            }
+                        });
+                builder.create().show();
+
+                return false;
+            }
+        });
+      //  dotProgressBar = (DotProgressBar)findViewById(R.id.dot_progress_bar_1);
+        LinearLayout ll_address_content = (LinearLayout) findViewById(R.id.ll_address_content);
         TextView name = (TextView)findViewById(R.id.mycardactivity_name);
         TextView companyName = (TextView)findViewById(R.id.mycardactivity_comapny_name);
         final TextView phone = (TextView)findViewById(R.id.mycardactivity_phone);
         final TextView email = (TextView)findViewById(R.id.mycardactivity_email);
         final TextView webiste = (TextView)findViewById(R.id.mycardactivity_website);
         final TextView directPhone = (TextView)findViewById(R.id.mycardactivity_direct_line);
-        TextView post = (TextView)findViewById(R.id.mycardactivity_post);
-        TextView street = (TextView)findViewById(R.id.mycardactivity_street);
-        TextView city = (TextView)findViewById(R.id.mycardactivity_city);
-        TextView state = (TextView)findViewById(R.id.mycardactivity_state);
-        TextView zipCode = (TextView)findViewById(R.id.mycardactivity_zip_code);
+        final TextView post = (TextView)findViewById(R.id.mycardactivity_post);
+        final TextView street = (TextView)findViewById(R.id.mycardactivity_street);
+        final TextView city = (TextView)findViewById(R.id.mycardactivity_city);
+        final TextView state = (TextView)findViewById(R.id.mycardactivity_state);
+        final TextView zipCode = (TextView)findViewById(R.id.mycardactivity_zip_code);
+        TextView country_name = (TextView)findViewById(R.id.mycardactivity_country_name);
 
         photoImageView = (KenBurnsView)findViewById(R.id.image_test);
         logoImageView = (ImageView) findViewById(R.id.image_company_logo);
@@ -147,16 +255,30 @@ public class MyCardActivity extends AppCompatActivity {
         {
             name.setText(myOwn.getName());
             companyName.setText(myOwn.getCompanyName());
-            phone.setText("Company line: "+myOwn.getPhone());
+           // phone.setText("Company line: "+myOwn.getPhone());
+            phone.setText("Company line: "+ PhoneNumberUtils.formatNumber(myOwn.getPhone()));
             email.setText(myOwn.getEmailAddress());
             email.setPaintFlags(email.getPaintFlags() |   Paint.UNDERLINE_TEXT_FLAG);
             webiste.setText(myOwn.getWebsiteUrl());
             webiste.setPaintFlags(webiste.getPaintFlags() |   Paint.UNDERLINE_TEXT_FLAG);
 
-            directPhone.setText("Cell: "+myOwn.getDirectPhone());
+           // directPhone.setText("Cell: "+myOwn.getDirectPhone());
+            directPhone.setText("Cell: "+PhoneNumberUtils.formatNumber(myOwn.getDirectPhone()));
+
             post.setText(myOwn.getPost());
             street.setText(myOwn.getStreet());
-            city.setText(myOwn.getCity()+","+myOwn.getState()+""+myOwn.getZipCode());
+            city.setText(myOwn.getCity()+", "+myOwn.getState()+" "+myOwn.getZipCode());
+            if(myOwn.getCountryName()!= null && !myOwn.getCountryName().trim().equals("") )
+            {
+                country_name.setText(myOwn.getCountryName());
+                country_name.setVisibility(View.VISIBLE);
+
+            }
+            else
+            {
+                country_name.setVisibility(View.GONE);
+            }
+
             //state.setText(myOwn.getState());
            // zipCode.setText(myOwn.getZipCode());
             myOwnPhoto = myOwn.getPhoto();
@@ -201,6 +323,32 @@ public class MyCardActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
                 startActivity(browserIntent);
+            }
+        });
+
+        ll_address_content.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                    /*Geocoder coder = new Geocoder(context);
+                    try {
+                        ArrayList<Address> adresses = (ArrayList<Address>) coder.getFromLocationName("Your Address", 50);
+                        //for(Address add : adresses){
+                           // if (statement) {//Controls to ensure it is right address such as country etc.
+                                double longitude = adresses.get(0).getLongitude();
+                                double latitude = adresses.get(0).getLatitude();
+                           // }
+                       // }
+                    } catch (IOException e) {
+                        Log.e("address_Error","Error:"+e.getLocalizedMessage());
+                        e.printStackTrace();
+
+                    } catch (Exception e) {
+                        Log.e("address_Error","Error:"+e.getLocalizedMessage());
+                        e.printStackTrace();
+                    }*/
+                Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
+                        Uri.parse("http://maps.google.co.in/maps?q="+street.getText()+","+city.getText()+","+state.getText()+" "+zipCode.getText()));
+                startActivity(intent);
             }
         });
 

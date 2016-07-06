@@ -92,8 +92,19 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.SongViewHolder
         holder.post.setText(song.getPost());
         holder.street.setText(song.getStreet());
         //holder.state.setText(song.getState());
-        holder.city.setText(song.getCity()+","+song.getState()+""+song.getZipCode());
+        holder.city.setText(song.getCity()+", "+song.getState()+" "+song.getZipCode());
        // holder.zipCode.setText(song.getZipCode());
+        if(song.getCountryName()!= null && !song.getCountryName().trim().equals("") )
+        {
+            holder.bcard_country_name.setText(song.getCountryName());
+            holder.bcard_country_name.setVisibility(View.VISIBLE);
+
+        }
+        else
+        {
+            holder.bcard_country_name.setVisibility(View.GONE);
+        }
+
 
         //needed afterwards , just commented for testing
          String encodedImage = song.getPhoto();
@@ -132,7 +143,7 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.SongViewHolder
 
 
     public class SongViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        TextView name,companyName,phone,email,website,directPhone,post, street,city,state, zipCode;
+        TextView name,companyName,phone,email,website,directPhone,post, street,city,state, zipCode,bcard_country_name;
         ImageView imageView;
         ImageView imageView2;
         private Context context;
@@ -142,7 +153,6 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.SongViewHolder
 
         public SongViewHolder(Context context,View itemView) {
             super(itemView);
-
             this.context=context;
             name = (TextView) itemView.findViewById(R.id.bcard_name);
             companyName = (TextView) itemView.findViewById(R.id.bcard_comapny_name);
@@ -158,6 +168,7 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.SongViewHolder
             zipCode = (TextView)itemView.findViewById(R.id.bcard_zip_code);
             imageView2 = (ImageView)itemView.findViewById(R.id.bcard_logo);
             address_section= (RelativeLayout) itemView.findViewById(R.id.address_section);
+            bcard_country_name = (TextView)itemView.findViewById(R.id.bcard_country_name);
             itemView.setOnClickListener(this);
         }
 
