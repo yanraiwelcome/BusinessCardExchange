@@ -1,7 +1,7 @@
 package com.project.businesscardexchange.models;
 
 /**
- * Created by Robus on 2/4/2016.
+ * Created by Yan on 2/4/2016.
  */
 public class BusinessCard {
     public String getTimestamp() {
