@@ -41,6 +41,16 @@ public class BusinessCard {
     private String zipCode;
     private String photocompanylogo;
 
+    public String getCountryName() {
+        return countryName;
+    }
+
+    public void setCountryName(String countryName) {
+        this.countryName = countryName;
+    }
+
+    private String countryName;
+
    public BusinessCard(){
 
    }

@@ -146,6 +146,13 @@ android:background="@color/blue_200"
                     android:layout_gravity="right"
                     android:visibility="gone"
                     />
+                    <TextView
+                        android:layout_below="@+id/bcard_zip_code"
+                        android:id="@+id/bcard_country_name"
+                        style="@style/MyTextViewStyle"
+                        android:layout_gravity="right"
+                        android:visibility="visible"
+                        />
                 </RelativeLayout>
 
             </LinearLayout>

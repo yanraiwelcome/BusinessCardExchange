@@ -28,9 +28,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.dd.morphingbutton.MorphingButton;
@@ -54,6 +56,8 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.OutputStream;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.Locale;
 
@@ -81,7 +85,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
     EditText mCity;
     EditText mState;
     EditText mZipCode;
-
+Spinner sp_country_name;
     MorphingButton btnMorph, btnMorphLogo;
 
     public static final String MyPREFERENCES = "MyPrefs";
@@ -98,6 +102,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
     public static final String ZIPCODE = "zipcodeKey";
     public static final String PHOTO_COMPANY_LOGO = "photocompanylogo";
     public static final String TIMESTAMP = "timestamp";
+    public static final String COUNTRY_NAME = "country_name";
 
 
     SharedPreferences sharedpreferences;
@@ -150,6 +155,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
             myPhototype = savedInstanceState.getString("photo_type");
             timeStamp = savedInstanceState.getString("time_stamp");
 
+
         }
 
         btnMorph = (MorphingButton) view.findViewById(R.id.upload_photo_button);
@@ -184,6 +190,20 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         websiteEdittext = (EditText) view.findViewById(R.id.editText5);
         mPhoneDirectLine = (EditText) view.findViewById(R.id.editText6);
         mPost = (EditText) view.findViewById(R.id.editText_post);
+        sp_country_name = (Spinner) view.findViewById(R.id.sp_country_name);
+        Locale[] locale = Locale.getAvailableLocales();
+        ArrayList<String> countries = new ArrayList<String>();
+        String country;
+        for( Locale loc : locale ){
+            country = loc.getDisplayCountry();
+            if( country.length() > 0 && !countries.contains(country) ){
+                countries.add( country );
+            }
+        }
+        Collections.sort(countries, String.CASE_INSENSITIVE_ORDER);
+        countries.add(0,"Select Country:");
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this.getActivity(),android.R.layout.simple_spinner_item, countries);
+        sp_country_name.setAdapter(adapter);
 
         setHypen(phoneEdittext);
         setHypen(mPhoneDirectLine);
@@ -203,8 +223,9 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
                 String imageEncoded = sharedpreferences.getString("PHOTO", "x");
                 String logoEncoded = sharedpreferences.getString("photocompanylogo", "x");
 
+Log.e("country",sp_country_name.getSelectedItem().toString());
 
-                if (!logoEncoded.equals("x") && !imageEncoded.equals("x") && !nameEdittext.getText().toString().equals("") && !comapanyNameEdittext.getText().toString().equals("") && !phoneEdittext.getText().toString().equals("") && !emailEdittext.getText().toString().equals("") && !websiteEdittext.getText().toString().equals("") && !mPhoneDirectLine.getText().toString().equals("")) {
+                if (!logoEncoded.equals("x") && !imageEncoded.equals("x") && !nameEdittext.getText().toString().equals("") && !comapanyNameEdittext.getText().toString().equals("") && !phoneEdittext.getText().toString().equals("") && !emailEdittext.getText().toString().equals("") && !websiteEdittext.getText().toString().equals("") && !mPhoneDirectLine.getText().toString().equals("") && !sp_country_name.getSelectedItem().toString().equals("Select Country:")) {
                     BusinessCard bCard = new BusinessCard();
                     bCard.setName(nameEdittext.getText().toString());
                     bCard.setCompanyName(comapanyNameEdittext.getText().toString());
@@ -221,6 +242,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
                     bCard.setPhotocompanylogo(logoEncoded);
                     bCard.setIsOwn(1);
                     bCard.setTimestamp(timeStamp);
+                    bCard.setCountryName(sp_country_name.getSelectedItem().toString());
                     //Start : shared preference for NFC use
                     SharedPreferences.Editor editor = sharedpreferences.edit();
                     editor.putString(NAME, nameEdittext.getText().toString());
@@ -235,6 +257,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
                     editor.putString(STATE, mState.getText().toString());
                     editor.putString(ZIPCODE, mZipCode.getText().toString());
                     editor.putString(TIMESTAMP, timeStamp);
+                    editor.putString(COUNTRY_NAME, sp_country_name.getSelectedItem().toString());
                     editor.commit();
                     //End
 
@@ -261,9 +284,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
                         myCardObject.put("photocompanylogo",bCard.getPhotocompanylogo());
                         myCardObject.put("timestamp",bCard.getTimestamp());
                         myCardObject.put("isOwn",0); //false because it is to be transfered to other
-
-
-
+                        myCardObject.put("country_name",sp_country_name.getSelectedItem().toString());
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }

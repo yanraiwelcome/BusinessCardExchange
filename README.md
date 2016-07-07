@@ -1,3 +1,1 @@
-BusinessCardExchange:
-
-Easily share card using NFC or Wifi
+﻿Business Card Transfer

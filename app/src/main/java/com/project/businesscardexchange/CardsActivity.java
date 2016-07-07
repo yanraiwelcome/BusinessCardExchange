@@ -46,7 +46,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
+//Added newly for showing demo by Prabin Silwal on 2016-7-6 9:53 AM OK??
 public class CardsActivity extends AppCompatActivity{
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
@@ -280,6 +280,7 @@ public class CardsActivity extends AppCompatActivity{
                                         nfcAdapter.setNdefPushMessageCallback(
                                                 new NfcAdapter.CreateNdefMessageCallback() {
                                                     public NdefMessage createNdefMessage(NfcEvent event) {
+
                                                         return new NFCService(getApplicationContext(), position, b).createMessage();
                                                     }
                                                 }, CardsActivity.this);
@@ -454,6 +455,15 @@ public class CardsActivity extends AppCompatActivity{
                                 curRealmObject.setZipCode(data.getString("zipCode"));
                                 curRealmObject.setPhotocompanylogo(data.getString("photocompanylogo"));
                                 curRealmObject.setTimestamp(data.getString("timestamp"));
+                                try {
+                                    curRealmObject.setCountryName(data.getString("country_name"));
+
+                                }
+                                catch (Exception e)
+                                {
+                                    e.fillInStackTrace();
+                                }
+
                                 // }
                                 //   BusinessCardRealm myCurrentObject = (BusinessCardRealm)myFile;
                                 Log.e("read_insert", "read:New:" + curRealmObject.toString());

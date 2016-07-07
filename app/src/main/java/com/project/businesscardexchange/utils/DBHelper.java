@@ -22,7 +22,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String DATABASE_NAME = "bizcard.db";
     public static final String BIZCARD_TABLE_NAME = "mycards";
 
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 2;
 
     private static DBHelper instance = null;
 
@@ -54,7 +54,7 @@ public class DBHelper extends SQLiteOpenHelper {
                         "phone text," +
                         "emailAddress text," +
                         "directPhone text," +
-                        "photo text,post text,street text,city text,state text,zipCode text, photocompanylogo text  )"
+                        "photo text,post text,street text,city text,state text,zipCode text, photocompanylogo text, countryName text  )"
         );
 
 
@@ -97,6 +97,8 @@ public class DBHelper extends SQLiteOpenHelper {
                 cur_card.setState(cursor.getString(12));
                 cur_card.setZipCode(cursor.getString(13));
                 cur_card.setPhotocompanylogo(cursor.getString(14));
+                cur_card.setCountryName(cursor.getString(15));
+
 
                 cardList.add(cur_card);
             } while (cursor.moveToNext());
@@ -145,6 +147,9 @@ public class DBHelper extends SQLiteOpenHelper {
             cur_card.setState(cursor.getString(12));
             cur_card.setZipCode(cursor.getString(13));
             cur_card.setPhotocompanylogo(cursor.getString(14));
+            cur_card.setCountryName(cursor.getString(15));
+
+
 
             cursor.close();
             db.close();
@@ -180,6 +185,8 @@ public class DBHelper extends SQLiteOpenHelper {
         insert_data_field_value.put("state",cur_card.getState());
         insert_data_field_value.put("zipCode",cur_card.getZipCode());
         insert_data_field_value.put("isOwn",cur_card.getIsOwn());
+        insert_data_field_value.put("countryName",cur_card.getCountryName());
+
 
         try {
             return db.insert(BIZCARD_TABLE_NAME, null, insert_data_field_value);
