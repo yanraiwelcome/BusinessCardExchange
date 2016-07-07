@@ -9,7 +9,9 @@ import android.nfc.NdefRecord;
 import android.nfc.NfcAdapter;
 import android.nfc.NfcEvent;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Parcelable;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -30,6 +32,9 @@ import com.google.gson.Gson;
 import com.project.businesscardexchange.fragments.ProfileActivity;
 import com.project.businesscardexchange.models.BusinessCard;
 import com.project.businesscardexchange.models.BusinessCardRealm;
+import com.project.businesscardexchange.sdk.cache.Cache;
+import com.project.businesscardexchange.ui.WifiFilehelper;
+import com.project.businesscardexchange.ui.transfer.ReceiveActivity;
 import com.project.businesscardexchange.utils.DBHelper;
 import com.romainpiel.shimmer.Shimmer;
 import com.romainpiel.shimmer.ShimmerTextView;
@@ -40,7 +45,13 @@ import net.frederico.showtipsview.ShowTipsView;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.nio.charset.Charset;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipInputStream;
 
 import lt.lemonlabs.android.expandablebuttonmenu.ExpandableButtonMenu;
 import lt.lemonlabs.android.expandablebuttonmenu.ExpandableMenuOverlay;
@@ -211,9 +222,9 @@ DBHelper myDbHelper;
 
 
     private NdefMessage createMessage() {
+
         String mimeType = "application/com.project.businesscardexchange";
         byte[] mimeBytes = mimeType.getBytes(Charset.forName("US-ASCII"));
-
 
         //GENERATE PAYLOAD
         BusinessCardRealm newCard = new BusinessCardRealm();
@@ -239,27 +250,76 @@ DBHelper myDbHelper;
         // TextView text = (TextView) findViewById(R.id.text);
         // byte[] payLoad = text.getText().toString().getBytes();
 
-        //GENERATE NFC MESSAGE
-        return new NdefMessage(
-                new NdefRecord[]{
-                        new NdefRecord(NdefRecord.TNF_MIME_MEDIA,
-                                mimeBytes,
-                                null,
-                                payLoad),
-                        NdefRecord.createApplicationRecord("com.project.businesscardexchange")
-                });
+        String inputPath = Environment.getExternalStoragePublicDirectory(MyApplication.getCardRootLocationDir())+ File.separator+MyApplication.ZIP_DIRECTORY_NAME;
+        // Log.d(tag,"inputPath:"+inputPath);
+        File file = new File(inputPath+newCard.getTimestamp()+".zip");
+        //  Log.d(tag,"filePath:"+file.getAbsolutePath());
+        if (file.exists()) {
+           // String zipName = newCard.getTimestamp();
+            // byte[] payLoad =  Uri.fromFile(new File(zipName)).get;
+            FileInputStream fileInputStream = null;
+           // File fileZip = new File(zipName);
+            // byte[] bFile = new byte[(int) fileZip.length()];
+            byte[] bFile = new byte[(int) file.length()];
+            try {
+                //convert file into array of bytes
+                fileInputStream = new FileInputStream(file);
+                fileInputStream.read(bFile);
+                fileInputStream.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            byte[] payLoad2 = bFile;
+
+            //GENERATE NFC MESSAGE
+            return new NdefMessage(
+                    new NdefRecord[]{
+                            new NdefRecord(NdefRecord.TNF_MIME_MEDIA,
+                                    mimeBytes,
+                                    null,
+                                    payLoad),
+                            new NdefRecord(NdefRecord.TNF_MIME_MEDIA,
+                                    mimeBytes,
+                                    null,
+                                    payLoad2),
+                            NdefRecord.createApplicationRecord("com.project.businesscardexchange")
+                    });
+        }
+        else
+        {
+            Toast.makeText(getApplicationContext(), "Can not share MainActivity:"+newCard.getName(), Toast.LENGTH_SHORT).show();
+            byte[] payLoad2 = null;
+            //GENERATE NFC MESSAGE
+            return new NdefMessage(
+                    new NdefRecord[]{
+                            new NdefRecord(NdefRecord.TNF_MIME_MEDIA,
+                                    mimeBytes,
+                                    null,
+                                    payLoad),
+                            new NdefRecord(NdefRecord.TNF_MIME_MEDIA,
+                                    mimeBytes,
+                                    null,
+                                    payLoad2),
+                            NdefRecord.createApplicationRecord("com.project.businesscardexchange")
+                    });
+        }
+
     }
 
     private void extractPayload(Intent beamIntent) {
         Parcelable[] messages = beamIntent.getParcelableArrayExtra(
                 NfcAdapter.EXTRA_NDEF_MESSAGES);
         NdefMessage message = (NdefMessage) messages[0];
-        NdefRecord record = message.getRecords()[0];
-        String payload = new String(record.getPayload());
+        //NdefRecord record = message.getRecords()[0];
+       // String payload = new String(record.getPayload());
 
-       putInsideDatabase(payload);
+        //First record contains JSON object
+        NdefRecord record1 = message.getRecords()[0];
+        //
+        NdefRecord record2 = message.getRecords()[1];
+        putInsideDatabase2(new String(record1.getPayload()),record2.getPayload());
 
-        Toast.makeText(this,"Successfully Transferred!!",Toast.LENGTH_LONG).show();
+         Toast.makeText(this,"Successfully Transferred!!",Toast.LENGTH_LONG).show();
 
     }
 
@@ -292,6 +352,8 @@ DBHelper myDbHelper;
             try {
                 bCard.setCountryName(jsonObject.getString("country_name"));
 
+
+                //
             }
             catch (Exception e)
             {
@@ -311,7 +373,125 @@ DBHelper myDbHelper;
 
     }
 
+    public void putInsideDatabase2(String payload,byte[] payload1){
 
+
+
+        try {
+            JSONObject jsonObject  = new JSONObject(payload);
+//            private String name;
+//            private String companyName;
+//            private String websiteUrl;
+//            private String phone;
+//            private String emailAddress;
+
+
+//            public BCard(String name, String companyName, String phone, String email, String website, String directPhone,
+// String street, String photo, String post, String city, String state, String zipCode){
+            BusinessCard bCard = new BusinessCard();
+            bCard.setName(jsonObject.getString("name"));
+            bCard.setCompanyName(jsonObject.getString("companyName"));
+            bCard.setPhone(jsonObject.getString("phone"));
+            bCard.setEmailAddress(jsonObject.getString("emailAddress"));
+            bCard.setWebsiteUrl(jsonObject.getString("websiteUrl"));
+            bCard.setDirectPhone(jsonObject.getString("directPhone"));
+            bCard.setStreet(jsonObject.getString("street"));
+            bCard.setPhoto(jsonObject.getString("photo"));
+            bCard.setPost(jsonObject.getString("post"));
+            bCard.setCity(jsonObject.getString("city"));
+            bCard.setState(jsonObject.getString("state"));
+            bCard.setZipCode(jsonObject.getString("zipCode"));
+            bCard.setPhotocompanylogo(jsonObject.getString("photocompanylogo"));
+            try {
+                bCard.setCountryName(jsonObject.getString("country_name"));
+                //
+            }
+            catch (Exception e)
+            {
+                e.fillInStackTrace();
+            }
+            bCard.setIsOwn(0);
+
+
+            /*String inputPath = Environment.getExternalStoragePublicDirectory(MyApplication.getCardRootLocationDir())+ File.separator+MyApplication.ZIP_DIRECTORY_NAME;
+            // Log.d(tag,"inputPath:"+inputPath);
+            String outFnm = inputPath+bCard.getTimestamp()+".zip";
+            try {
+                FileOutputStream fileOuputStream = new FileOutputStream(outFnm);
+                fileOuputStream.write(payload1);
+                fileOuputStream.close();
+
+            } catch ( IOException iox ){
+                iox.printStackTrace();
+            }
+*/
+
+            //Step1: Make folder if not exist
+            String outputPathWrite = Environment.getExternalStoragePublicDirectory(MyApplication.getCardRootLocationDir())+ File.separator+bCard.getTimestamp();
+            File dir = new File(outputPathWrite);
+            if (!dir.exists()) {
+                dir.mkdirs();
+            }
+            //Step2: Loop through zip byte array and put files to folder
+            ZipInputStream zipStream = new ZipInputStream(new ByteArrayInputStream(payload1));
+            ZipEntry entry = null;
+            try {
+                while ((entry = zipStream.getNextEntry()) != null) {
+
+                    String entryName = entry.getName();
+                    Log.e("BYTE_CHECK", "entryName;" + entryName);
+                    FileOutputStream out = new FileOutputStream(outputPathWrite+File.separator+entryName);//openFileOutput(entryName, Context.MODE_PRIVATE);
+                    byte[] byteBuff = new byte[4096];
+                    int bytesRead = 0;
+                    while ((bytesRead = zipStream.read(byteBuff)) != -1) {
+                        out.write(byteBuff, 0, bytesRead);
+                    }
+                    out.close();
+                    zipStream.closeEntry();
+                }
+                zipStream.close();
+            } catch (Exception e) {
+                Log.e("BYTE_CHECK", "Error2;" + e.getLocalizedMessage());
+            }
+            //Step3: Make zip of file and Write that zip to Zip folder
+            WifiFilehelper zipManager = new WifiFilehelper();
+            String[] s = new String[3];
+            // Type the path of the files in here
+            s[0] = bCard.getPhoto();
+            Log.e("BYTE_CHECK", "F1;" + s[0]);
+
+            File txt_name = WifiFilehelper.getOutputMediaFile(7,bCard.getTimestamp(),"");
+            zipManager.writeToFile(getApplicationContext(),bCard.toString(),txt_name);
+            //zipManager.writeToFile(getActivity(),copyOfBCard.toString(),txt_name);
+            s[1] = txt_name.getAbsolutePath();
+            Log.e("BYTE_CHECK", "F2;" + s[1]);
+            s[2] = bCard.getPhotocompanylogo();
+            Log.e("BYTE_CHECK", "F3;" + s[2]);
+            //  Log.e("ZipTest","s0:"+imageEncoded);
+            //  Log.e("ZipTest","s1:"+logoEncoded);
+            //  Log.e("ZipTest","s2:"+txt_name.getAbsolutePath());
+            // calling the zip function
+            String outputPathWrite2 = Environment.getExternalStoragePublicDirectory(MyApplication.getCardRootLocationDir())+File.separator+MyApplication.ZIP_DIRECTORY_NAME;
+            File dir2 = new File(outputPathWrite2);
+            if (!dir2.exists()) {
+                dir2.mkdirs();
+            }
+            zipManager.zip(s, outputPathWrite2+bCard.getTimestamp()+"1234.zip");
+            Log.e("BYTE_CHECK", "PATH;" + outputPathWrite+File.separator+MyApplication.ZIP_DIRECTORY_NAME+File.separator+bCard.getTimestamp()+".zip");
+
+
+            //  myRealm.beginTransaction();
+            // BusinessCardRealm copyOfBCard = myRealm.copyToRealm(bCard);
+            //myRealm.commitTransaction();
+            //Step4: Finally Insert into database
+            myDbHelper.insertCard(bCard);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+
+    }
 
 
     @Override
@@ -328,6 +508,7 @@ DBHelper myDbHelper;
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
+
         return true;
     }
 
@@ -340,6 +521,10 @@ DBHelper myDbHelper;
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+
+            Cache.selectedList.clear();
+            startActivity(new Intent(MainActivity.this, ReceiveActivity.class)
+                    .putExtra("name", Build.DEVICE));//nameEdit.getText().toString()));
             return true;
         }
 

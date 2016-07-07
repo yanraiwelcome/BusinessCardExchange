@@ -82,7 +82,7 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.SongViewHolder
         BusinessCard song = cardList.get(position);
         holder.name.setText(song.getName());
         holder.companyName.setText(song.getCompanyName());
-        holder.phone.setText("Company line: "+PhoneNumberUtils.formatNumber(song.getPhone()));
+        holder.phone.setText("Company: "+PhoneNumberUtils.formatNumber(song.getPhone()));
         holder.email.setText(song.getEmailAddress());
         holder.email.setPaintFlags(holder.email.getPaintFlags() |   Paint.UNDERLINE_TEXT_FLAG);
 

@@ -46,6 +46,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
 //Added newly for showing demo by Prabin Silwal on 2016-7-6 9:53 AM OK??
 public class CardsActivity extends AppCompatActivity{
     private RecyclerView mRecyclerView;
@@ -290,7 +291,8 @@ public class CardsActivity extends AppCompatActivity{
                                         Toast.makeText(getApplicationContext(),"NFC ERROR ",Toast.LENGTH_LONG).show();
                                     }
 
-                                        break;
+
+                                            break;
                                     case 2:
                                         //Toast.makeText(getApplicationContext(), "clicked 3:"+b.getName(), Toast.LENGTH_SHORT).show();
                                        /* Intent gotoWifi = new Intent(CardsActivity.this, com.project.businesscardexchange.ui.main.MainActivity.class);
