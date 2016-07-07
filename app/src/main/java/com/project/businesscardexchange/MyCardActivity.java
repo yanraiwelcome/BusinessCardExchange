@@ -256,15 +256,26 @@ public class MyCardActivity extends AppCompatActivity {
             name.setText(myOwn.getName());
             companyName.setText(myOwn.getCompanyName());
            // phone.setText("Company line: "+myOwn.getPhone());
-            phone.setText("Company line: "+ PhoneNumberUtils.formatNumber(myOwn.getPhone()));
+            try {
+                phone.setText("Company line: " + PhoneNumberUtils.formatNumber(myOwn.getPhone()));
+            }
+            catch (Exception e)
+            {
+                e.fillInStackTrace();
+            }
             email.setText(myOwn.getEmailAddress());
             email.setPaintFlags(email.getPaintFlags() |   Paint.UNDERLINE_TEXT_FLAG);
             webiste.setText(myOwn.getWebsiteUrl());
             webiste.setPaintFlags(webiste.getPaintFlags() |   Paint.UNDERLINE_TEXT_FLAG);
 
            // directPhone.setText("Cell: "+myOwn.getDirectPhone());
-            directPhone.setText("Cell: "+PhoneNumberUtils.formatNumber(myOwn.getDirectPhone()));
-
+            try {
+                directPhone.setText("Cell: " + PhoneNumberUtils.formatNumber(myOwn.getDirectPhone()));
+            }
+            catch (Exception e)
+            {
+                e.fillInStackTrace();
+            }
             post.setText(myOwn.getPost());
             street.setText(myOwn.getStreet());
             city.setText(myOwn.getCity()+", "+myOwn.getState()+" "+myOwn.getZipCode());
