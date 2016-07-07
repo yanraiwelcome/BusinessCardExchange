@@ -70,6 +70,7 @@ public class MainActivity extends AppCompatActivity
     public static final String CITY = "cityKey";
     public static final String STATE = "stateKey";
     public static final String ZIPCODE = "zipCodeKey";
+    public static final String COUNTRY_NAME = "country_name";
 
     NfcAdapter mNfcAdapter;
     SharedPreferences prefs;
@@ -230,6 +231,7 @@ DBHelper myDbHelper;
         newCard.setCity(prefs.getString(CITY,"NA"));
         newCard.setZipCode(prefs.getString(ZIPCODE,"NA"));
         newCard.setTimestamp(prefs.getString(TIMESTAMP,"NA"));
+        newCard.setCountryName(prefs.getString(COUNTRY_NAME,"NA"));
         newCard.setOwn(false);
 
         String toJson = gson.toJson(newCard);
@@ -256,9 +258,6 @@ DBHelper myDbHelper;
         String payload = new String(record.getPayload());
 
        putInsideDatabase(payload);
-
-
-
 
         Toast.makeText(this,"Successfully Transferred!!",Toast.LENGTH_LONG).show();
 
@@ -290,6 +289,14 @@ DBHelper myDbHelper;
             bCard.setState(jsonObject.getString("state"));
             bCard.setZipCode(jsonObject.getString("zipCode"));
             bCard.setPhotocompanylogo(jsonObject.getString("photocompanylogo"));
+            try {
+                bCard.setCountryName(jsonObject.getString("country_name"));
+
+            }
+            catch (Exception e)
+            {
+                e.fillInStackTrace();
+            }
             bCard.setIsOwn(0);
 
           //  myRealm.beginTransaction();

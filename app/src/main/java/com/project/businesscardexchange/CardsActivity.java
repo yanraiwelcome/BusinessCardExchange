@@ -280,6 +280,7 @@ public class CardsActivity extends AppCompatActivity{
                                         nfcAdapter.setNdefPushMessageCallback(
                                                 new NfcAdapter.CreateNdefMessageCallback() {
                                                     public NdefMessage createNdefMessage(NfcEvent event) {
+
                                                         return new NFCService(getApplicationContext(), position, b).createMessage();
                                                     }
                                                 }, CardsActivity.this);
