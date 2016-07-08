@@ -322,13 +322,11 @@ public class CardsActivity extends AppCompatActivity{
                                     case 3:
                                         try {
                                             //bizCardLists.remove(position);
-                                            recyclerView.removeView(v);
-                                            new SongAdapter(bizCardLists, CardsActivity.this).removeItem(position);
                                             //  List<BCard> bCardList = new Select().all().from(BCard.class).execute();
                                             //new Delete().from(BCard.class).where("Id = ?",id).execute();
                                             String title = b.getName();
                                             String deleteName=b.getTimestamp();
-                                            myDbHelper.deleteCard(deleteName);
+
                                             // All changes to data must happen in a transaction
                                          //   myRealm.beginTransaction();
                                             // remove single match
@@ -374,7 +372,16 @@ public class CardsActivity extends AppCompatActivity{
                                                 }
                                             }
 
+                                            recyclerView.removeView(v);
+                                            new SongAdapter(bizCardLists, CardsActivity.this).removeItem(position);
 
+                                            int result_delete = myDbHelper.deleteCard(deleteName);
+                                            Log.e("result_delete:",""+result_delete);
+                                            if(result_delete==0)
+                                            {
+                                                int result_delete2 = myDbHelper.deleteCardByDetail(b);
+                                                Log.e("result_delete:2",""+result_delete2);
+                                            }
                                             // notifyDataSetChanged();
                                             Toast.makeText(CardsActivity.this, "Deleted " + title, Toast.LENGTH_SHORT).show();
 

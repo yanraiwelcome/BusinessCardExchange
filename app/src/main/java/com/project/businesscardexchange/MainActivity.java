@@ -402,6 +402,7 @@ DBHelper myDbHelper;
             bCard.setState(jsonObject.getString("state"));
             bCard.setZipCode(jsonObject.getString("zipCode"));
             bCard.setPhotocompanylogo(jsonObject.getString("photocompanylogo"));
+            bCard.setTimestamp(jsonObject.getString("timestamp"));
             try {
                 bCard.setCountryName(jsonObject.getString("country_name"));
                 //
@@ -427,7 +428,7 @@ DBHelper myDbHelper;
 */
 
             //Step1: Make folder if not exist
-            String outputPathWrite = Environment.getExternalStoragePublicDirectory(MyApplication.getCardRootLocationDir())+ File.separator+bCard.getTimestamp();
+            String outputPathWrite = Environment.getExternalStoragePublicDirectory(MyApplication.getCardRootLocationDir())+ File.separator+MyApplication.IMAGE_DIRECTORY_NAME+File.separator+bCard.getTimestamp();
             File dir = new File(outputPathWrite);
             if (!dir.exists()) {
                 dir.mkdirs();
@@ -441,6 +442,17 @@ DBHelper myDbHelper;
                     String entryName = entry.getName();
                     Log.e("BYTE_CHECK", "entryName;" + entryName);
                     FileOutputStream out = new FileOutputStream(outputPathWrite+File.separator+entryName);//openFileOutput(entryName, Context.MODE_PRIVATE);
+                    if(entryName.equals("DATA.txt"))
+                    {
+                    }
+                    else if(entryName.equals("LOGO.jpg"))
+                    {
+                        bCard.setPhotocompanylogo(outputPathWrite+File.separator+entryName);
+                    }
+                    else if(entryName.equals("PHOTO.jpg"))
+                    {
+                        bCard.setPhoto(outputPathWrite+File.separator+entryName);
+                    }
                     byte[] byteBuff = new byte[4096];
                     int bytesRead = 0;
                     while ((bytesRead = zipStream.read(byteBuff)) != -1) {
@@ -464,9 +476,27 @@ DBHelper myDbHelper;
             zipManager.writeToFile(getApplicationContext(),bCard.toString(),txt_name);
             //zipManager.writeToFile(getActivity(),copyOfBCard.toString(),txt_name);
             s[1] = txt_name.getAbsolutePath();
+            File dirS1 = new File(txt_name.getAbsolutePath());
+            if (!dirS1.exists()) {
+                //dir2.mkdirs();
+                Log.e("BYTE_CHECK", "F1Error;" + "Not Found");
+            }
+            else {
+                Log.e("BYTE_CHECK", "F1 Found");
+
+            }
             Log.e("BYTE_CHECK", "F2;" + s[1]);
             s[2] = bCard.getPhotocompanylogo();
             Log.e("BYTE_CHECK", "F3;" + s[2]);
+            File dirS2 = new File( bCard.getPhotocompanylogo());
+            if (!dirS2.exists()) {
+                //dir2.mkdirs();
+                Log.e("BYTE_CHECK", "F3Error;" + "Not Found");
+            }
+            else {
+                Log.e("BYTE_CHECK", "F3 Found");
+
+            }
             //  Log.e("ZipTest","s0:"+imageEncoded);
             //  Log.e("ZipTest","s1:"+logoEncoded);
             //  Log.e("ZipTest","s2:"+txt_name.getAbsolutePath());
@@ -476,8 +506,8 @@ DBHelper myDbHelper;
             if (!dir2.exists()) {
                 dir2.mkdirs();
             }
-            zipManager.zip(s, outputPathWrite2+bCard.getTimestamp()+"1234.zip");
-            Log.e("BYTE_CHECK", "PATH;" + outputPathWrite+File.separator+MyApplication.ZIP_DIRECTORY_NAME+File.separator+bCard.getTimestamp()+".zip");
+            zipManager.zip(s, outputPathWrite2+bCard.getTimestamp()+".zip");
+            Log.e("BYTE_CHECK", "PATH;" + outputPathWrite2+bCard.getTimestamp()+".zip");
 
 
             //  myRealm.beginTransaction();
