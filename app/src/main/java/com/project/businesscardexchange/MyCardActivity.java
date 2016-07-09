@@ -257,7 +257,7 @@ public class MyCardActivity extends AppCompatActivity {
             companyName.setText(myOwn.getCompanyName());
            // phone.setText("Company line: "+myOwn.getPhone());
             try {
-                phone.setText("Company line: " + PhoneNumberUtils.formatNumber(myOwn.getPhone()));
+                phone.setText("Company: " + PhoneNumberUtils.formatNumber(myOwn.getPhone()));
             }
             catch (Exception e)
             {

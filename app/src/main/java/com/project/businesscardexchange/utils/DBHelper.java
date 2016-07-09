@@ -120,6 +120,19 @@ public class DBHelper extends SQLiteOpenHelper {
 
     }
 
+    public int deleteCardByDetail(BusinessCard b)
+    {
+
+        SQLiteDatabase db = this.getReadableDatabase();
+
+       /* String itemid = "Select item_id from data_field_values join data_items on data_field_values.item_id = data_items.item_id" +
+                " where data_field_value.data_field_id = "'+()+"' and data_field_value.type_id = '"+()+"'"*/
+       // return db.delete(BIZCARD_TABLE_NAME, "timestamp = ?", new String[]{timestamp});
+        return db.delete(BIZCARD_TABLE_NAME,
+            "name=? AND companyName=? AND websiteUrl=? AND emailAddress=? AND directPhone=? AND phone=?",
+            new String[] { b.getName(),b.getCompanyName(), b.getWebsiteUrl(), b.getEmailAddress(),b.getDirectPhone(),b.getPhone()});
+    }
+
 
     //Getting respective Id of the selected item
     public BusinessCard getSingleOwn() {

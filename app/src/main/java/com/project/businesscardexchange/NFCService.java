@@ -3,10 +3,14 @@ package com.project.businesscardexchange;
 import android.content.Context;
 import android.nfc.NdefMessage;
 import android.nfc.NdefRecord;
+import android.os.Environment;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.project.businesscardexchange.models.BusinessCard;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.nio.charset.Charset;
 
 public class NFCService{
@@ -47,19 +51,66 @@ public class NFCService{
                 mBCard.getPost(),mBCard.getCity(),mBCard.getState(),mBCard.getZipCode(),mBCard.getPhotocompanylogo()));
         */
        String toJson = gson.toJson(mBCard);
-
-
        byte[] payLoad = toJson.getBytes();
 
-        //GENERATE NFC MESSAGE
-        return new NdefMessage(
-                new NdefRecord[]{
-                        new NdefRecord(NdefRecord.TNF_MIME_MEDIA,
-                                mimeBytes,
-                                null,
-                                payLoad),
-                        NdefRecord.createApplicationRecord("com.project.businesscardexchange")
-                });
+       String inputPath = Environment.getExternalStoragePublicDirectory(MyApplication.getCardRootLocationDir())+ File.separator+MyApplication.ZIP_DIRECTORY_NAME;
+       // Log.d(tag,"inputPath:"+inputPath);
+       File file = new File(inputPath+mBCard.getTimestamp()+".zip");
+       //  Log.d(tag,"filePath:"+file.getAbsolutePath());
+
+       if (file.exists())
+       {
+          // String zipName = mBCard.getTimestamp();
+          // byte[] payLoad =  Uri.fromFile(new File(zipName)).get;
+           FileInputStream fileInputStream=null;
+          // File fileZip = new File(zipName);
+          // byte[] bFile = new byte[(int) fileZip.length()];
+           byte[] bFile = new byte[(int) file.length()];
+           try{
+               //convert file into array of bytes
+               fileInputStream = new FileInputStream(file);
+               fileInputStream.read(bFile);
+               fileInputStream.close();
+
+           }catch(Exception e){
+               e.printStackTrace();
+           }
+           byte[] payLoad2 =  bFile;
+           //GENERATE NFC MESSAGE
+           return new NdefMessage(
+                   new NdefRecord[]{
+                           new NdefRecord(NdefRecord.TNF_MIME_MEDIA,
+                                   mimeBytes,
+                                   null,
+                                   payLoad),
+                           new NdefRecord(NdefRecord.TNF_MIME_MEDIA,
+                                   mimeBytes,
+                                   null,
+                                   payLoad2),
+                           NdefRecord.createApplicationRecord("com.project.businesscardexchange")
+                   });
+
+       }
+       else
+       {
+           Toast.makeText(mContext, "Can not share :"+mBCard.getName(), Toast.LENGTH_SHORT).show();
+           byte[] payLoad2 = null;
+           //GENERATE NFC MESSAGE
+           return new NdefMessage(
+                   new NdefRecord[]{
+                           new NdefRecord(NdefRecord.TNF_MIME_MEDIA,
+                                   mimeBytes,
+                                   null,
+                                   payLoad),
+                           new NdefRecord(NdefRecord.TNF_MIME_MEDIA,
+                                   mimeBytes,
+                                   null,
+                                   payLoad2),
+                           NdefRecord.createApplicationRecord("com.project.businesscardexchange")
+                   });
+       }
+
+
     }
 
 

@@ -3,6 +3,8 @@ package com.project.businesscardexchange.ui;
 import android.content.Context;
 import android.util.Log;
 
+import com.project.businesscardexchange.MyApplication;
+
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
@@ -202,4 +204,46 @@ public class WifiFilehelper {
 
 
     }
+    static public File getOutputMediaFile(int type,String timeStamp,String myPhototype)
+    {
+        // External sdcard location
+        File mediaStorageDir = MyApplication.getCardLocation();
+
+        //OR
+  /*
+        File mediaStorageDir = new File(
+                Environment
+                        .getExternalStorageDirectory().getAbsolutePath()+File.separator+Config.IMAGE_DIRECTORY_NAME);
+*/
+//
+
+        // Create the storage directory if it does not exist
+        if (!mediaStorageDir.exists()) {
+            if (!mediaStorageDir.mkdirs()) {
+                // Log.d("test", "Oops! Failed create "  + Config.IMAGE_DIRECTORY_NAME + " directory");
+                return null;
+            }
+        }
+
+        // Create a media file name
+        File mediaFile;
+
+        if(type == 7)
+        {
+            mediaFile = new File(mediaStorageDir.getPath() + File.separator
+                    + timeStamp + File.separator + "DATA" + ".txt");
+        }
+        else {
+            if (myPhototype.equals("image_own")) {
+                mediaFile = new File(mediaStorageDir.getPath() + File.separator
+                        + timeStamp + File.separator + "PHOTO" + ".jpg");
+            } else {
+                mediaFile = new File(mediaStorageDir.getPath() + File.separator
+                        + timeStamp + File.separator + "LOGO" + ".jpg");
+            }
+        }
+
+        return mediaFile;
     }
+
+}
