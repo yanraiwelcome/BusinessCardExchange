@@ -74,7 +74,7 @@ android:background="@color/blue_200"
                 android:layout_height="fill_parent"
                 android:adjustViewBounds="true"
                 android:scaleType="centerCrop"
-                android:background="@color/purple"
+                                android:background="@color/purple"
                 android:id="@+id/image_test_for_business_cards" />
 
             <LinearLayout
@@ -154,6 +154,13 @@ android:background="@color/blue_200"
                         android:visibility="visible"
                         />
                 </RelativeLayout>
+                <TextView
+                    style="@style/MyTextViewStyle"
+                    android:layout_gravity="right" />
+                <TextView
+                    style="@style/MyTextViewStyle"
+                    android:layout_gravity="right" />
+
 
 
 

@@ -177,6 +177,8 @@ DBHelper myDbHelper;
 //        }
         //set the navigation header profile with name and email address from the shared preference
         //trying we can delelte this
+// set Ndef message to send by beam
+        nfcAdapter = NfcAdapter.getDefaultAdapter(this);
 
         if (NfcAdapter.ACTION_NDEF_DISCOVERED.equals(getIntent().getAction())) {
             Log.e("BYTE_CHECK", "extractPayload; STARTED" );
@@ -188,14 +190,13 @@ DBHelper myDbHelper;
 
 
     }
-
+    NfcAdapter nfcAdapter;
 
 
     @Override
     protected void onResume() {
         super.onResume();
-       // set Ndef message to send by beam
-        NfcAdapter nfcAdapter = NfcAdapter.getDefaultAdapter(this);
+
         assert nfcAdapter != null;
         try
         {
@@ -225,11 +226,11 @@ DBHelper myDbHelper;
 //    }
 
 
-    private NdefMessage createMessage() {
+    private NdefMessage createMessage()
+    {
 
         String mimeType = "application/com.project.businesscardexchange";
         byte[] mimeBytes = mimeType.getBytes(Charset.forName("US-ASCII"));
-
         //GENERATE PAYLOAD
         BusinessCardRealm newCard = new BusinessCardRealm();
         newCard.setCompanyName(prefs.getString(COMPANY_NAME, "NA"));
@@ -519,6 +520,24 @@ DBHelper myDbHelper;
             //myRealm.commitTransaction();
             //Step4: Finally Insert into database
             myDbHelper.insertCard(bCard);
+
+            //Step5: Resend own card
+            try
+            {
+                nfcAdapter.setNdefPushMessageCallback(
+                        new NfcAdapter.CreateNdefMessageCallback() {
+                            public NdefMessage createNdefMessage(NfcEvent event) {
+                                return createMessage();
+                            }
+                        }, this);
+
+            }
+            catch (Exception e)
+            {
+                e.fillInStackTrace();
+                Log.e("Error","Error occured");
+            }
+
 
         } catch (JSONException e) {
             e.printStackTrace();
