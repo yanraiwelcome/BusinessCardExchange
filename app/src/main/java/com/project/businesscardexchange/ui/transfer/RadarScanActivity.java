@@ -54,7 +54,7 @@ public class RadarScanActivity extends BaseActivity {
     private List<P2PNeighbor> neighbors = new ArrayList<>();
     private P2PNeighbor curNeighbor;
     private FileTransferAdapter transferAdapter;
-
+//Display scanned near by network to send using wifi
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

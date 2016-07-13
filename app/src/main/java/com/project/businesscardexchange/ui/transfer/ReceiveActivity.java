@@ -59,7 +59,7 @@ public class ReceiveActivity extends BaseActivity
     private RelativeLayout receiveLayout;
     private ListView receiveListView;
     private FileTransferAdapter transferAdapter;
-
+//For receiving of Wifi
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -83,7 +83,6 @@ public class MainActivity extends AppCompatActivity
     public static final String ZIPCODE = "zipCodeKey";
     public static final String COUNTRY_NAME = "country_name";
 
-    NfcAdapter mNfcAdapter;
     SharedPreferences prefs;
     Gson gson;
  //   Realm myRealm;
@@ -169,7 +168,7 @@ DBHelper myDbHelper;
     gson = new Gson();
 
         // Check for available NFC Adapter
-//        mNfcAdapter = NfcAdapter.getDefaultAdapter(this);
+        nfcAdapter = NfcAdapter.getDefaultAdapter(this);
 //        if (mNfcAdapter == null) {
 //            Toast.makeText(this, "NFC is not available", Toast.LENGTH_LONG).show();
 //           finish();
@@ -177,9 +176,8 @@ DBHelper myDbHelper;
 //        }
         //set the navigation header profile with name and email address from the shared preference
         //trying we can delelte this
-// set Ndef message to send by beam
-        nfcAdapter = NfcAdapter.getDefaultAdapter(this);
 
+        //This is receiving part of NFC ; this will called when NFC beam clicked from sender; It is defined in Manifest file
         if (NfcAdapter.ACTION_NDEF_DISCOVERED.equals(getIntent().getAction())) {
             Log.e("BYTE_CHECK", "extractPayload; STARTED" );
 
@@ -190,13 +188,14 @@ DBHelper myDbHelper;
 
 
     }
+
+
     NfcAdapter nfcAdapter;
-
-
     @Override
     protected void onResume() {
         super.onResume();
-
+       // set Ndef message to send by beam
+       // NfcAdapter nfcAdapter = NfcAdapter.getDefaultAdapter(this);
         assert nfcAdapter != null;
         try
         {
@@ -226,11 +225,11 @@ DBHelper myDbHelper;
 //    }
 
 
-    private NdefMessage createMessage()
-    {
+    private NdefMessage createMessage() {
 
         String mimeType = "application/com.project.businesscardexchange";
         byte[] mimeBytes = mimeType.getBytes(Charset.forName("US-ASCII"));
+
         //GENERATE PAYLOAD
         BusinessCardRealm newCard = new BusinessCardRealm();
         newCard.setCompanyName(prefs.getString(COMPANY_NAME, "NA"));
@@ -310,6 +309,9 @@ DBHelper myDbHelper;
         }
 
     }
+
+    //wifi this or nfc
+    //NFC
 
     private void extractPayload(Intent beamIntent) {
         Parcelable[] messages = beamIntent.getParcelableArrayExtra(
@@ -520,10 +522,10 @@ DBHelper myDbHelper;
             //myRealm.commitTransaction();
             //Step4: Finally Insert into database
             myDbHelper.insertCard(bCard);
-
             //Step5: Resend own card
             try
             {
+                //sending Part of NFC
                 nfcAdapter.setNdefPushMessageCallback(
                         new NfcAdapter.CreateNdefMessageCallback() {
                             public NdefMessage createNdefMessage(NfcEvent event) {
@@ -537,8 +539,6 @@ DBHelper myDbHelper;
                 e.fillInStackTrace();
                 Log.e("Error","Error occured");
             }
-
-
         } catch (JSONException e) {
             e.printStackTrace();
         }

@@ -25,6 +25,7 @@ import java.lang.ref.WeakReference;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 
+// Wifi P2P manager to Send and receiving files
 
 /**
  * Created by CrazyCoder on 2015/9/17.
