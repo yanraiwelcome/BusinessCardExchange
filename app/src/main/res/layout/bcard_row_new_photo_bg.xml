@@ -2,7 +2,7 @@
 <android.support.v7.widget.CardView android:id="@+id/card_view"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="5dp"
+    android:layout_marginBottom="0dp"
     android:layout_marginLeft="5dp"
     android:layout_marginRight="5dp"
     android:layout_marginTop="10dp"
@@ -12,10 +12,22 @@
     app:contentPadding="0dp"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.flaviofaria.kenburnsview.KenBurnsView
+            android:layout_gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:adjustViewBounds="true"
+            android:scaleType="centerCrop"
+            android:background="@color/purple"
+            android:id="@+id/image_test_for_business_cards" />
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-android:background="@color/blue_200"
         >
         <LinearLayout
             android:layout_width="match_parent"
@@ -32,17 +44,17 @@ android:background="@color/blue_200"
                 >
                 <TextView
                     android:id="@+id/bcard_name"
-                    style="@style/MyTextViewStyle"
+                    style="@style/MyTextViewStylePhotoBg"
                     android:textAppearance="?android:attr/textAppearanceLarge"
                     />
                 <TextView
                     android:id="@+id/bcard_comapny_name"
-                    style="@style/MyTextViewStyle"
+                    style="@style/MyTextViewStylePhotoBg"
                     android:textAppearance="?android:attr/textAppearanceLarge"
                     />
                 <TextView
                     android:id="@+id/bcard_comapny_post"
-                    style="@style/MyTextViewStyle"
+                    style="@style/MyTextViewStylePhotoBg"
                     android:textAppearance="?android:attr/textAppearanceLarge"/>
 
             </LinearLayout>
@@ -67,41 +79,32 @@ android:background="@color/blue_200"
             android:weightSum="7"
             android:orientation="horizontal"
             >
-            <com.flaviofaria.kenburnsview.KenBurnsView
-                android:layout_gravity="center"
-                android:layout_width="0dp"
-                android:layout_weight="3"
-                android:layout_height="fill_parent"
-                android:adjustViewBounds="true"
-                android:scaleType="centerCrop"
-                android:background="@color/purple"
-                android:id="@+id/image_test_for_business_cards" />
+
 
             <LinearLayout
-                android:layout_width="0dp"
-                android:layout_weight="4"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 >
 
                 <TextView
                     android:id="@+id/bcard_website"
-                    style="@style/MyTextViewStyle"
+                    style="@style/MyTextViewStylePhotoBg"
                     android:layout_gravity="right"
                     android:textColor="@color/blue_A400"
                     />
 
                 <TextView
                     android:id="@+id/bcard_phone"
-                    style="@style/MyTextViewStyle"
+                    style="@style/MyTextViewStylePhotoBg"
                     android:layout_gravity="right"/>
                 <TextView
                     android:id="@+id/bcard_direct_phone"
-                    style="@style/MyTextViewStyle"
+                    style="@style/MyTextViewStylePhotoBg"
                     android:layout_gravity="right" />
                 <TextView
                     android:id="@+id/bcard_email"
-                    style="@style/MyTextViewStyle"
+                    style="@style/MyTextViewStylePhotoBg"
                     android:textColor="@color/blue_A400"
 
                     android:layout_gravity="right"/>
@@ -115,7 +118,7 @@ android:background="@color/blue_200"
                 <TextView
 
                     android:id="@+id/sddress"
-                    style="@style/MyTextViewStyle"
+                    style="@style/MyTextViewStylePhotoBg"
                     android:text="Address:"
                     android:layout_gravity="right"
                     android:textColor="@color/red"
@@ -124,40 +127,36 @@ android:background="@color/blue_200"
                 <TextView
                     android:layout_below="@+id/sddress"
                     android:id="@+id/bcard_street"
-                    style="@style/MyTextViewStyle"
+                    style="@style/MyTextViewStylePhotoBg"
                     android:layout_gravity="right"  />
 
                 <TextView
                     android:layout_below="@+id/bcard_street"
                     android:id="@+id/bcard_city"
-                    style="@style/MyTextViewStyle"
+                    style="@style/MyTextViewStylePhotoBg"
                     android:layout_gravity="right"  />
                     <TextView
                         android:layout_below="@+id/bcard_city"
                         android:id="@+id/bcard_state"
-                        style="@style/MyTextViewStyle"
+                        style="@style/MyTextViewStylePhotoBg"
                         android:layout_gravity="right"
                         android:visibility="gone"
                         />
                 <TextView
                     android:layout_below="@+id/bcard_city"
                     android:id="@+id/bcard_zip_code"
-                    style="@style/MyTextViewStyle"
+                    style="@style/MyTextViewStylePhotoBg"
                     android:layout_gravity="right"
                     android:visibility="gone"
                     />
                     <TextView
                         android:layout_below="@+id/bcard_zip_code"
                         android:id="@+id/bcard_country_name"
-                        style="@style/MyTextViewStyle"
+                        style="@style/MyTextViewStylePhotoBg"
                         android:layout_gravity="right"
                         android:visibility="visible"
                         />
                 </RelativeLayout>
-
-
-
-
 
             </LinearLayout>
         </LinearLayout>
@@ -174,5 +173,5 @@ android:background="@color/blue_200"
 
         </LinearLayout>
     </RelativeLayout>
-
+</FrameLayout>
 </android.support.v7.widget.CardView>

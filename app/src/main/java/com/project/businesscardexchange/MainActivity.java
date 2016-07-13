@@ -179,7 +179,11 @@ DBHelper myDbHelper;
         //trying we can delelte this
 
         if (NfcAdapter.ACTION_NDEF_DISCOVERED.equals(getIntent().getAction())) {
+            Log.e("BYTE_CHECK", "extractPayload; STARTED" );
+
             extractPayload(getIntent());
+            Log.e("BYTE_CHECK", "extractPayload; ENDED");
+
         }
 
 

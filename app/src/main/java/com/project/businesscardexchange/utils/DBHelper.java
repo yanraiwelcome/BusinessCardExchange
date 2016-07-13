@@ -73,7 +73,7 @@ public class DBHelper extends SQLiteOpenHelper {
             //"SELECT * from data_field where type_id = type_id"
             //return ArrayList<HashMap<String,String>		data = new ArrayList<String>();
             SQLiteDatabase sqlite = this.getWritableDatabase();
-            String   selectAll = "select * from "+BIZCARD_TABLE_NAME+" order by name ASC";
+            String   selectAll = "select * from "+BIZCARD_TABLE_NAME+" order by name COLLATE NOCASE";
 
             Cursor cursor = sqlite.rawQuery(selectAll, null);
             cardList = new ArrayList<BusinessCard>();

@@ -53,7 +53,23 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.SongViewHolder
     @Override
     public SongViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.bcard_row_new, parent, false);
+        int setDesign = 1;//This for my design
+      //  int setDesign =2; //This for Backgroung Image design
+        View view=null;
+        if(setDesign ==1)
+        {
+             view = LayoutInflater.from(parent.getContext()).inflate(R.layout.bcard_row_new, parent, false);
+        }
+        else if(setDesign ==2)
+        {
+             view = LayoutInflater.from(parent.getContext()).inflate(R.layout.bcard_row_new_photo_bg, parent, false);
+
+        }
+        else
+        {
+             view = LayoutInflater.from(parent.getContext()).inflate(R.layout.bcard_row_new, parent, false);
+
+        }
         return new SongViewHolder(context,view);
     }
 

@@ -2,11 +2,13 @@ package com.project.businesscardexchange;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Paint;
 import android.net.Uri;
 import android.nfc.NdefMessage;
+import android.nfc.NdefRecord;
 import android.nfc.NfcAdapter;
 import android.nfc.NfcEvent;
 import android.os.AsyncTask;
@@ -29,9 +31,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.flaviofaria.kenburnsview.KenBurnsView;
+import com.google.gson.Gson;
 import com.guo.duoduo.p2pmanager.p2pconstant.P2PConstant;
 import com.guo.duoduo.p2pmanager.p2pentity.P2PFileInfo;
 import com.project.businesscardexchange.models.BusinessCard;
+import com.project.businesscardexchange.models.BusinessCardRealm;
 import com.project.businesscardexchange.sdk.cache.Cache;
 import com.project.businesscardexchange.ui.transfer.RadarScanActivity;
 import com.project.businesscardexchange.ui.transfer.fragment.CardFragment;
@@ -43,6 +47,8 @@ import net.frederico.showtipsview.ShowTipsBuilder;
 import net.frederico.showtipsview.ShowTipsView;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.nio.charset.Charset;
 
 //import io.realm.Realm;
 
@@ -58,21 +64,146 @@ public class MyCardActivity extends AppCompatActivity {
   //  Realm myRealm;
     DBHelper myDbHelper;
 
-    private static final String MyPREFERENCES = "MyPrefs" ;
-    private static final String NAME = "nameKey";
-    private static final String COMPANY_NAME = "companyNameKey";
-    private static final String EMAIL_ADDRESS = "emailKey";
-    private static final String PHONE = "phoneKey";
-    private static final String WEBSITE_URL = "websiteUrlKey";
+
+
+    BusinessCard myOwn;
+    String myOwnPhoto,myOwnLogo;
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.e("NFC_TEST","start");
+        // set Ndef message to send by beam
+        NfcAdapter nfcAdapter = NfcAdapter.getDefaultAdapter(this);
+        assert nfcAdapter != null;
+        try
+        {
+            Log.e("NFC_TEST","initialize");
+
+            nfcAdapter.setNdefPushMessageCallback(
+                    new NfcAdapter.CreateNdefMessageCallback() {
+                        public NdefMessage createNdefMessage(NfcEvent event) {
+                            Log.e("NFC_TEST","Created Message");
+
+                            return createMessage();
+                        }
+                    }, this);
+        }
+        catch (Exception e)
+        {
+            e.fillInStackTrace();
+            Log.e("NFC_TEST","ERROR");
+        }
+
+        //See if app got called by AndroidBeam intent.
+
+    }
+    SharedPreferences prefs;
+    Gson gson;
+   public static final String  MyPREFERENCES = "MyPrefs" ;
+    public static final String NAME = "nameKey";
+    public static final String COMPANY_NAME = "companyNameKey";
+    public static final String EMAIL_ADDRESS = "emailKey";
+    public static final String PHONE = "phoneKey";
+    public static final String WEBSITE_URL = "websiteUrlKey";
     public static final String PHONE_DIRECT_LINE = "directLineKey";
+    public static final String TIMESTAMP = "timestamp";
+    public static final String PHOTO_COMPANY_LOGO = "photocompanylogo";
+    public static final String PHOTO = "PHOTO";
     public static final String POST="postKey";
     public static final String STREET = "streetKey";
     public static final String CITY = "cityKey";
     public static final String STATE = "stateKey";
-    public static final String ZIPCODE = "zipcodeKey";
+    public static final String ZIPCODE = "zipCodeKey";
+    public static final String COUNTRY_NAME = "country_name";
+    private NdefMessage createMessage() {
 
-    BusinessCard myOwn;
-    String myOwnPhoto,myOwnLogo;
+        String mimeType = "application/com.project.businesscardexchange";
+        byte[] mimeBytes = mimeType.getBytes(Charset.forName("US-ASCII"));
+
+        //GENERATE PAYLOAD
+        BusinessCardRealm newCard = new BusinessCardRealm();
+        newCard.setCompanyName(prefs.getString(COMPANY_NAME, "NA"));
+        newCard.setName(prefs.getString(NAME, "NA"));
+        newCard.setEmailAddress(prefs.getString(EMAIL_ADDRESS, "NA"));
+        newCard.setPhone(prefs.getString(PHONE, "NA"));
+        newCard.setWebsiteUrl(prefs.getString(WEBSITE_URL, "NA"));
+        newCard.setStreet(prefs.getString(STREET,"NA"));
+        newCard.setState(prefs.getString(STATE,"NA"));
+        newCard.setPost(prefs.getString(POST,"NA"));
+        newCard.setDirectPhone(prefs.getString(PHONE_DIRECT_LINE,"NA"));
+        newCard.setPhoto(prefs.getString(PHOTO,"NA"));
+        newCard.setPhotocompanylogo(prefs.getString(PHOTO_COMPANY_LOGO,"NA"));
+        newCard.setCity(prefs.getString(CITY,"NA"));
+        newCard.setZipCode(prefs.getString(ZIPCODE,"NA"));
+        newCard.setTimestamp(prefs.getString(TIMESTAMP,"NA"));
+        newCard.setCountryName(prefs.getString(COUNTRY_NAME,"NA"));
+        newCard.setOwn(false);
+
+        String toJson = gson.toJson(newCard);
+        byte[] payLoad = toJson.getBytes();
+        // TextView text = (TextView) findViewById(R.id.text);
+        // byte[] payLoad = text.getText().toString().getBytes();
+
+        String inputPath = Environment.getExternalStoragePublicDirectory(MyApplication.getCardRootLocationDir())+ File.separator+MyApplication.ZIP_DIRECTORY_NAME;
+        // Log.d(tag,"inputPath:"+inputPath);
+        File file = new File(inputPath+newCard.getTimestamp()+".zip");
+        //  Log.d(tag,"filePath:"+file.getAbsolutePath());
+        if (file.exists()) {
+            Log.e("NFC_TEST","File found, trying to share");
+
+            // String zipName = newCard.getTimestamp();
+            // byte[] payLoad =  Uri.fromFile(new File(zipName)).get;
+            FileInputStream fileInputStream = null;
+            // File fileZip = new File(zipName);
+            // byte[] bFile = new byte[(int) fileZip.length()];
+            byte[] bFile = new byte[(int) file.length()];
+            try {
+                //convert file into array of bytes
+                fileInputStream = new FileInputStream(file);
+                fileInputStream.read(bFile);
+                fileInputStream.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            byte[] payLoad2 = bFile;
+            Log.e("NFC_TEST","Success");
+
+            //GENERATE NFC MESSAGE
+            return new NdefMessage(
+                    new NdefRecord[]{
+                            new NdefRecord(NdefRecord.TNF_MIME_MEDIA,
+                                    mimeBytes,
+                                    null,
+                                    payLoad),
+                            new NdefRecord(NdefRecord.TNF_MIME_MEDIA,
+                                    mimeBytes,
+                                    null,
+                                    payLoad2),
+                            NdefRecord.createApplicationRecord("com.project.businesscardexchange")
+                    });
+        }
+        else
+        {
+            Log.e("NFC_TEST","Can not share");
+
+            Toast.makeText(getApplicationContext(), "Can not share MainActivity:"+newCard.getName(), Toast.LENGTH_SHORT).show();
+            byte[] payLoad2 = null;
+            //GENERATE NFC MESSAGE
+            return new NdefMessage(
+                    new NdefRecord[]{
+                            new NdefRecord(NdefRecord.TNF_MIME_MEDIA,
+                                    mimeBytes,
+                                    null,
+                                    payLoad),
+                            new NdefRecord(NdefRecord.TNF_MIME_MEDIA,
+                                    mimeBytes,
+                                    null,
+                                    payLoad2),
+                            NdefRecord.createApplicationRecord("com.project.businesscardexchange")
+                    });
+        }
+
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,6 +217,8 @@ public class MyCardActivity extends AppCompatActivity {
 
       //  myRealm = MyApplication.getRealmInstance(getApplicationContext());
         myDbHelper = DBHelper.getInstance(getApplicationContext());
+        prefs = getSharedPreferences(MyPREFERENCES, MODE_PRIVATE);
+
       /*  final BusinessCardRealm[] myDog = new BusinessCardRealm[1];
         myRealm.executeTransaction(new Realm.Transaction() {
             @Override
@@ -134,7 +267,7 @@ public class MyCardActivity extends AppCompatActivity {
                 AlertDialog.Builder builder = new AlertDialog.Builder(MyCardActivity.this);
                 builder.setTitle("Choose Action:");
                 builder.setItems(new CharSequence[]
-                                {"Share", "Send to NFC", "Send to wifi"},
+                                {"Share", "Send to wifi"},//, "Send to NFC"
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
 
@@ -162,7 +295,7 @@ public class MyCardActivity extends AppCompatActivity {
                                         }
 
                                         break;
-                                    case 1:
+                               /*     case 1:
                                         // Toast.makeText(getApplicationContext(), "clicked 2:"+b.getName(), Toast.LENGTH_SHORT).show();
                                         //  Toast.makeText(CardsActivity.this, "share", Toast.LENGTH_SHORT).show();
 //                                Intent intent = new Intent(Intent.ACTION_SEND, Uri.parse("tel:"));
@@ -182,7 +315,7 @@ public class MyCardActivity extends AppCompatActivity {
                                         }
 
                                         break;
-                                    case 2:
+                               */     case 1:
                                         //Toast.makeText(getApplicationContext(), "clicked 3:"+b.getName(), Toast.LENGTH_SHORT).show();
                                        /* Intent gotoWifi = new Intent(CardsActivity.this, com.project.businesscardexchange.ui.main.MainActivity.class);
                                         gotoWifi.putExtra("type","shareCard");
