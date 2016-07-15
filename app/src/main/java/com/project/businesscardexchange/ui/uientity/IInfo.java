@@ -8,6 +8,7 @@ import android.graphics.drawable.Drawable;
  */
 public interface IInfo {
 
+    public String getFileGuiName();
     public String getFilePath();
 
     public String getFileSize();

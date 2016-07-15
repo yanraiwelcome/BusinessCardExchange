@@ -79,6 +79,8 @@ public class CardSelectAdapter extends RecyclerView.Adapter<CardSelectAdapter.My
         holder.appName.setText(list.get(position).getFileName());
         holder.appSize.setText(list.get(position).getFileSize());
 
+        holder.FileName.setText(list.get(position).getFileGuiName());
+
         holder.itemLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -108,6 +110,7 @@ public class CardSelectAdapter extends RecyclerView.Adapter<CardSelectAdapter.My
         ImageView app_choice;
         TextView appName;
         TextView appSize;
+        TextView FileName;
         LinearLayout itemLayout;
 
         public MyViewHolder(View view) {
@@ -117,6 +120,7 @@ public class CardSelectAdapter extends RecyclerView.Adapter<CardSelectAdapter.My
             appSize = (TextView) view.findViewById(R.id.AppSize);
             app_choice = (ImageView) view.findViewById(R.id.app_choice);
             itemLayout = (LinearLayout) view.findViewById(R.id.app_item_layout);
+            FileName = (TextView) view.findViewById(R.id.FileName);
         }
     }
 }

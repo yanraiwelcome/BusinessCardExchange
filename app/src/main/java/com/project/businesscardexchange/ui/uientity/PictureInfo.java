@@ -15,6 +15,12 @@ public class PictureInfo implements IInfo {
     public String picSize;
     public String picName;
 
+
+    @Override
+    public String getFileGuiName() {
+        return null;
+    }
+
     @Override
     public String getFilePath() {
         return picPath;

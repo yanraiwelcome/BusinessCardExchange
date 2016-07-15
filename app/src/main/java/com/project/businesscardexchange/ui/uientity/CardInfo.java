@@ -23,9 +23,17 @@ public class CardInfo implements IInfo {
     public String photoPath;
     public String logoPath;
     public String appLabel;
+    public String FileGuiName;
     public String pkgName;
     public String appSize;
     public String appFilePath;
+
+
+
+    @Override
+    public String getFileGuiName() {
+        return FileGuiName;
+    }
 
     @Override
     public String getFilePath() {

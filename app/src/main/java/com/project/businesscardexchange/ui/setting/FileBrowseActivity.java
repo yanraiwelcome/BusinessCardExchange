@@ -6,6 +6,7 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 
 import com.project.businesscardexchange.R;
 import com.project.businesscardexchange.ui.common.BaseActivity;
@@ -25,7 +26,7 @@ public class FileBrowseActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_file_browse);
-
+Log.e("Browse","onCreate");
         Toolbar toolbar = (Toolbar) findViewById(R.id.activity_receive_browse_toolbar);
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();

@@ -123,6 +123,7 @@ public class CardFragment extends Fragment
                 {
                     Log.d(tag,"Yes Exist:");
                     CardInfo info = getCardInfo(card);
+
                     if (info == null)
                         continue;
                     else if (!appInfo.contains(info))
@@ -160,6 +161,7 @@ public class CardFragment extends Fragment
         //String label = ((String)app.loadLabel(pkManager)).replace(" ","") + ".apk";
         String label = app.getTimestamp()+ ".zip";
         cardInfo.appLabel = label;
+        cardInfo.FileGuiName = app.getName();
         cardInfo.photoPath = app.getPhoto();
         cardInfo.logoPath = app.getPhotocompanylogo();
        // cardInfo.appIcon = app.loadIcon(pkManager);
