@@ -390,6 +390,7 @@ public class MyCardActivity extends AppCompatActivity {
             companyName.setText(myOwn.getCompanyName());
            // phone.setText("Company line: "+myOwn.getPhone());
             try {
+
                 phone.setText("Comp: " + PhoneNumberUtils.formatNumber(myOwn.getPhone()));
             }
             catch (Exception e)
@@ -429,21 +430,31 @@ public class MyCardActivity extends AppCompatActivity {
             myOwnLogo = myOwn.getPhotocompanylogo();
         }
 
+        photoImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + PhoneNumberUtils.formatNumber(myOwn.getPhone()) ));
+                startActivity(intent);
+            }
+
+        });
+
 
         //intent to dial company line
         phone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + phone.getText().toString()));
+                Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + PhoneNumberUtils.formatNumber(myOwn.getPhone()) ));
                 startActivity(intent);
             }
         });
+
 
         //intent to dial direct line
         directPhone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + directPhone.getText().toString()));
+                Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" +  PhoneNumberUtils.formatNumber(myOwn.getDirectPhone()) ));
                 startActivity(intent);
             }
         });

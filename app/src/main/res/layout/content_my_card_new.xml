@@ -81,6 +81,7 @@
                 android:weightSum="7"
                 android:orientation="horizontal"
                 android:layout_marginBottom="20dp"
+                android:duplicateParentState="false"
 
                 >
                 <com.flaviofaria.kenburnsview.KenBurnsView
@@ -103,6 +104,7 @@
                     android:orientation="vertical"
                     android:paddingBottom="0dp"
                     android:gravity="right"
+                    android:duplicateParentState="false"
 
                     >
 
@@ -135,6 +137,8 @@
                         android:gravity="left"
                         android:orientation="vertical"
                         android:layout_marginTop="5dp"
+                        android:duplicateParentState="false"
+
                         android:id="@+id/ll_address_content"
                         >
                         <TextView

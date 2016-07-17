@@ -27,9 +27,6 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.SongViewHolder
     SongViewHolder songViewHolder;
     List<BusinessCard> cardList= Collections.emptyList();
     Context context;
-    public interface OnItemLongClickListener {
-        public boolean onItemLongClicked(int position);
-    }
 
     Bitmap decodedBitmap;
     Bitmap decodedBitmap1;
@@ -158,7 +155,7 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.SongViewHolder
     }
 
 
-    public class SongViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public class SongViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         TextView name,companyName,phone,email,website,directPhone,post, street,city,state, zipCode,bcard_country_name;
         ImageView imageView;
         ImageView imageView2;
@@ -167,7 +164,7 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.SongViewHolder
         private String url;
 
 
-        public SongViewHolder(Context context,View itemView) {
+        public SongViewHolder(final Context context, View itemView) {
             super(itemView);
             this.context=context;
             name = (TextView) itemView.findViewById(R.id.bcard_name);
@@ -186,21 +183,6 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.SongViewHolder
             address_section= (RelativeLayout) itemView.findViewById(R.id.address_section);
             bcard_country_name = (TextView)itemView.findViewById(R.id.bcard_country_name);
             itemView.setOnClickListener(this);
-        }
-
-
-
-        @Override
-        public void onClick(View view) {
-
-            //intent to dial company line
-            phone.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + phone.getText().toString()));
-                    context.startActivity(intent);
-                }
-            });
             address_section.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -223,6 +205,13 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.SongViewHolder
                     }*/
                     Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
                             Uri.parse("http://maps.google.co.in/maps?q="+street.getText()+","+city.getText()+","+state.getText()+" "+zipCode.getText()));
+                    context.startActivity(intent);
+                }
+            });
+            phone.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + phone.getText().toString()));
                     context.startActivity(intent);
                 }
             });
@@ -265,10 +254,70 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.SongViewHolder
 
 
 
+        @Override
+        public void onClick(View view)
+        {
+
+            imageView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                }
+            });
+            //intent to dial company line
+
+        }
+
+
+       /* @Override
+        public boolean onLongClick(View v) {
+
+
+            imageView.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    imageView.getParent().requestDisallowInterceptTouchEvent(false);
+
+                    return false;
+                }
+            });
+            phone.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    phone.getParent().requestDisallowInterceptTouchEvent(false);
+
+                    return false;
+                }
+            });
+            address_section.setOnLongClickListener(null);
+            //intent to dial direct line
+            directPhone.setOnLongClickListener(null);
+            //intent to send email
+            email.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    email.getParent().requestDisallowInterceptTouchEvent(false);
+
+                    return false;
+                }
+            });
+
+            //intent to go to the website
+            website.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    website.getParent().requestDisallowInterceptTouchEvent(false);
+
+                    return false;
+                }
+            });
+
+            return false;
+        }*/
     }
     @Override
     public void onViewRecycled(SongViewHolder holder) {
-        holder.itemView.setOnLongClickListener(null);
+       // holder.itemView.setOnLongClickListener(null);
         super.onViewRecycled(holder);
     }
 
