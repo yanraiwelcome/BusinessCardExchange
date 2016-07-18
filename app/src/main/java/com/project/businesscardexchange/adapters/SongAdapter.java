@@ -211,7 +211,7 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.SongViewHolder
             phone.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + phone.getText().toString()));
+                    Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + phone.getText().toString().substring(5)));
                     context.startActivity(intent);
                 }
             });
@@ -220,7 +220,7 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.SongViewHolder
             directPhone.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + directPhone.getText().toString()));
+                    Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + directPhone.getText().toString().substring(5)));
                     context.startActivity(intent);
                 }
             });

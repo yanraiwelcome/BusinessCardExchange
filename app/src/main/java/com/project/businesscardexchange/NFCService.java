@@ -79,10 +79,12 @@ public class NFCService{
            //GENERATE NFC MESSAGE
            return new NdefMessage(
                    new NdefRecord[]{
+                           //In first record we are sending json
                            new NdefRecord(NdefRecord.TNF_MIME_MEDIA,
                                    mimeBytes,
                                    null,
                                    payLoad),
+                           //In below second record we are sending zip file
                            new NdefRecord(NdefRecord.TNF_MIME_MEDIA,
                                    mimeBytes,
                                    null,

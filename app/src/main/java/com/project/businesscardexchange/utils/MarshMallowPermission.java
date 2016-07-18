@@ -8,7 +8,7 @@ import android.support.v4.content.ContextCompat;
 import android.widget.Toast;
 
 /**
- * Created by CrazyCoder on 4/26/2016.
+ * Created by thulungrai on 4/26/2016.
  */
 public class MarshMallowPermission {
 

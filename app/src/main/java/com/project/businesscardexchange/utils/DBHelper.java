@@ -11,9 +11,9 @@ import com.project.businesscardexchange.models.BusinessCard;
 
 import java.util.ArrayList;
 
-/**
- * Created by sandeep on 12/24/14.
- */
+
+
+
 
 public class DBHelper extends SQLiteOpenHelper {
     //HashMap for index and its values

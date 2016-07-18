@@ -311,13 +311,13 @@ DBHelper myDbHelper;
     }
 
     //wifi this or nfc
-    //NFC
+    //NFC transfer
 
     private void extractPayload(Intent beamIntent) {
         Parcelable[] messages = beamIntent.getParcelableArrayExtra(
                 NfcAdapter.EXTRA_NDEF_MESSAGES);
         NdefMessage message = (NdefMessage) messages[0];
-        //NdefRecord record = message.getRecords()[0];
+        //NdefRecord reescord = message.getRecords()[0];
        // String payload = new String(record.getPayload());
 
         //First record contains JSON object
@@ -330,55 +330,6 @@ DBHelper myDbHelper;
 
     }
 
-    public void putInsideDatabase(String payload){
-        try {
-            JSONObject jsonObject  = new JSONObject(payload);
-//            private String name;
-//            private String companyName;
-//            private String websiteUrl;
-//            private String phone;
-//            private String emailAddress;
-
-
-//            public BCard(String name, String companyName, String phone, String email, String website, String directPhone,
-// String street, String photo, String post, String city, String state, String zipCode){
-            BusinessCard bCard = new BusinessCard();
-            bCard.setName(jsonObject.getString("name"));
-            bCard.setCompanyName(jsonObject.getString("companyName"));
-            bCard.setPhone(jsonObject.getString("phone"));
-            bCard.setEmailAddress(jsonObject.getString("emailAddress"));
-            bCard.setWebsiteUrl(jsonObject.getString("websiteUrl"));
-            bCard.setDirectPhone(jsonObject.getString("directPhone"));
-            bCard.setStreet(jsonObject.getString("street"));
-            bCard.setPhoto(jsonObject.getString("photo"));
-            bCard.setPost(jsonObject.getString("post"));
-            bCard.setCity(jsonObject.getString("city"));
-            bCard.setState(jsonObject.getString("state"));
-            bCard.setZipCode(jsonObject.getString("zipCode"));
-            bCard.setPhotocompanylogo(jsonObject.getString("photocompanylogo"));
-            try {
-                bCard.setCountryName(jsonObject.getString("country_name"));
-
-
-                //
-            }
-            catch (Exception e)
-            {
-                e.fillInStackTrace();
-            }
-            bCard.setIsOwn(0);
-
-          //  myRealm.beginTransaction();
-           // BusinessCardRealm copyOfBCard = myRealm.copyToRealm(bCard);
-            //myRealm.commitTransaction();
-            myDbHelper.insertCard(bCard);
-
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-
-    }
 
     public void putInsideDatabase2(String payload,byte[] payload1){
 

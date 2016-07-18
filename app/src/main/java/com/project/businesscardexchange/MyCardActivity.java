@@ -57,11 +57,11 @@ public class MyCardActivity extends AppCompatActivity {
     private KenBurnsView photoImageView;
 
     private ImageView logoImageView;
-   // DotProgressBar dotProgressBar;
+    // DotProgressBar dotProgressBar;
 
     //SharedPreferences prefs;
     String url;
-  //  Realm myRealm;
+    //  Realm myRealm;
     DBHelper myDbHelper;
 
 
@@ -99,7 +99,7 @@ public class MyCardActivity extends AppCompatActivity {
     }
     SharedPreferences prefs;
     Gson gson;
-   public static final String  MyPREFERENCES = "MyPrefs" ;
+    public static final String  MyPREFERENCES = "MyPrefs" ;
     public static final String NAME = "nameKey";
     public static final String COMPANY_NAME = "companyNameKey";
     public static final String EMAIL_ADDRESS = "emailKey";
@@ -215,7 +215,7 @@ public class MyCardActivity extends AppCompatActivity {
         if (actionBar != null)
             actionBar.setDisplayHomeAsUpEnabled(true);
 
-      //  myRealm = MyApplication.getRealmInstance(getApplicationContext());
+        //  myRealm = MyApplication.getRealmInstance(getApplicationContext());
         myDbHelper = DBHelper.getInstance(getApplicationContext());
         prefs = getSharedPreferences(MyPREFERENCES, MODE_PRIVATE);
 
@@ -241,7 +241,7 @@ public class MyCardActivity extends AppCompatActivity {
 */
 
         try {
-           // myOwn =   myRealm.where(BusinessCardRealm.class).equalTo("isOwn",true).findFirst();
+            // myOwn =   myRealm.where(BusinessCardRealm.class).equalTo("isOwn",true).findFirst();
             myOwn = myDbHelper.getSingleOwn();
             /*for(BusinessCardRealm c:results1)
             {
@@ -252,7 +252,7 @@ public class MyCardActivity extends AppCompatActivity {
                 }
             }*/
 
-          //  Log.e("Result","Total:"+results1.size());
+            //  Log.e("Result","Total:"+results1.size());
             //lists = select.all().from(BCard.class).orderBy("name ASC").execute();
         } catch (Exception e)
         {
@@ -347,7 +347,7 @@ public class MyCardActivity extends AppCompatActivity {
                 return false;
             }
         });
-      //  dotProgressBar = (DotProgressBar)findViewById(R.id.dot_progress_bar_1);
+        //  dotProgressBar = (DotProgressBar)findViewById(R.id.dot_progress_bar_1);
         LinearLayout ll_address_content = (LinearLayout) findViewById(R.id.ll_address_content);
         TextView name = (TextView)findViewById(R.id.mycardactivity_name);
         TextView companyName = (TextView)findViewById(R.id.mycardactivity_comapny_name);
@@ -383,12 +383,12 @@ public class MyCardActivity extends AppCompatActivity {
 
         showtips.show(this);
 
-       // prefs = getSharedPreferences(MyPREFERENCES, MODE_PRIVATE);
+        // prefs = getSharedPreferences(MyPREFERENCES, MODE_PRIVATE);
         if(myOwn != null)
         {
             name.setText(myOwn.getName());
             companyName.setText(myOwn.getCompanyName());
-           // phone.setText("Company line: "+myOwn.getPhone());
+            // phone.setText("Company line: "+myOwn.getPhone());
             try {
 
                 phone.setText("Comp: " + PhoneNumberUtils.formatNumber(myOwn.getPhone()));
@@ -402,7 +402,7 @@ public class MyCardActivity extends AppCompatActivity {
             webiste.setText(myOwn.getWebsiteUrl());
             webiste.setPaintFlags(webiste.getPaintFlags() |   Paint.UNDERLINE_TEXT_FLAG);
 
-           // directPhone.setText("Cell: "+myOwn.getDirectPhone());
+            // directPhone.setText("Cell: "+myOwn.getDirectPhone());
             try {
                 directPhone.setText("Cell: " + PhoneNumberUtils.formatNumber(myOwn.getDirectPhone()));
             }
@@ -425,7 +425,7 @@ public class MyCardActivity extends AppCompatActivity {
             }
 
             //state.setText(myOwn.getState());
-           // zipCode.setText(myOwn.getZipCode());
+            // zipCode.setText(myOwn.getZipCode());
             myOwnPhoto = myOwn.getPhoto();
             myOwnLogo = myOwn.getPhotocompanylogo();
         }
@@ -510,10 +510,10 @@ public class MyCardActivity extends AppCompatActivity {
         //...
         //now starting async task to handle image in different thread
 
-      // new MyAsyncTask().execute("");
+        // new MyAsyncTask().execute("");
 
-       // Toast.makeText(this,imageEncoded,Toast.LENGTH_LONG).show();
-       // new MyAsyncTaskForLogo().execute("");
+        // Toast.makeText(this,imageEncoded,Toast.LENGTH_LONG).show();
+        // new MyAsyncTaskForLogo().execute("");
 
         try {
             // byte[] decodedString = Base64.decode(encodedImage, Base64.DEFAULT);
@@ -541,7 +541,7 @@ public class MyCardActivity extends AppCompatActivity {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-           // dotProgressBar.setVisibility(View.VISIBLE);
+            // dotProgressBar.setVisibility(View.VISIBLE);
         }
 
         @Override
@@ -569,7 +569,7 @@ public class MyCardActivity extends AppCompatActivity {
                 Log.e("Url Image",":"+myOwn.getPhoto());
                 if (bitmap != null) {
                     photoImageView.setImageBitmap(bitmap);
-                 //   dotProgressBar.setVisibility(View.GONE);
+                    //   dotProgressBar.setVisibility(View.GONE);
                 } else {
 
                 }
@@ -593,7 +593,7 @@ public class MyCardActivity extends AppCompatActivity {
 
         @Override
         protected Bitmap doInBackground(String... params) {
-          //  String imageEncoded = prefs.getString("PHOTO","Default value");
+            //  String imageEncoded = prefs.getString("PHOTO","Default value");
             String logoEncoded = null;//prefs.getString("photocompanylogo", "Default Value");
             if(myOwnLogo == null)
             {

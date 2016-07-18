@@ -22,6 +22,7 @@ import java.io.IOException;
  * Created by CrazyCoder on 5/8/2016.
  */
 public class ImageHelper {
+
     /*
     Image compress like in whats app
      */

@@ -21,9 +21,6 @@ import java.io.File;
 import java.util.ArrayList;
 
 
-/**
- * Created by CrazyCoder on 2015/10/11.
- */
 public class ReceivedAppAdapter extends RecyclerView.Adapter<ReceivedAppAdapter.MyHolder> {
     private Context mContext;
     private ArrayList<IInfo> mAppInfoList;

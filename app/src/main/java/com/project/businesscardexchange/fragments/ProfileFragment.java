@@ -62,7 +62,7 @@ import java.util.Date;
 import java.util.Locale;
 
 /**
- * Created by Robus on 2/4/2016.
+ * Created by Thulung-rai on 2/4/2016.
  */
 public class ProfileFragment extends Fragment implements View.OnClickListener {
 

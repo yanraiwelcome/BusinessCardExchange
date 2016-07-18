@@ -173,68 +173,7 @@ public class CardsActivity extends AppCompatActivity{
             @Override
             public boolean onItemLongClicked(final RecyclerView recyclerView, final int position, final View v) {
 
-                /*new MaterialDialog.Builder(CardsActivity.this)
-                        .positiveText("Delete")
-                        .positiveColor(Color.parseColor("#F44336"))
-                        .negativeText("Share")
-                        .negativeColor(Color.parseColor("#00BCD4"))
-                        .backgroundColor(Color.parseColor("#40303F9F"))
-                        .theme(Theme.DARK)
-                        .onPositive(new MaterialDialog.SingleButtonCallback() {
-                            @Override
-                            public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
 
-                                try {
-                                    recyclerView.removeView(v);
-
-                                    new SongAdapter(bizCardLists, CardsActivity.this).removeItem(position);
-
-                                    //  List<BCard> bCardList = new Select().all().from(BCard.class).execute();
-                                    //new Delete().from(BCard.class).where("Id = ?",id).execute();
-                                    RealmResults<BusinessCardRealm> results = myRealm.where(BusinessCardRealm.class).findAll();
-                                    BusinessCardRealm b = results.get(position);
-                                    String title = b.getName();
-                                    // All changes to data must happen in a transaction
-                                    myRealm.beginTransaction();
-                                    // remove single match
-                                    results.remove(position);
-                                    myRealm.commitTransaction();
-                                    if (results.size() == 0) {
-                                      //  Prefs.with(context).setPreLoad(false);
-                                    }
-                                   // notifyDataSetChanged();
-                                    Toast.makeText(CardsActivity.this, "Deleted " + title, Toast.LENGTH_SHORT).show();
-
-
-                                } catch (Exception e) {
-                                    e.printStackTrace();
-                                }
-                            }
-
-                        })
-                        .onNegative(new MaterialDialog.SingleButtonCallback() {
-                            @Override
-                            public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-
-                                Toast.makeText(CardsActivity.this, "share", Toast.LENGTH_SHORT).show();
-//                                Intent intent = new Intent(Intent.ACTION_SEND, Uri.parse("tel:"));
-//                                startActivity(intent);
-                                RealmResults<BusinessCardRealm> results = myRealm.where(BusinessCardRealm.class).findAll();
-                               final BusinessCardRealm bCard = results.get(position);
-
-                                NfcAdapter nfcAdapter = NfcAdapter.getDefaultAdapter(CardsActivity.this);
-                                assert nfcAdapter != null;
-                                nfcAdapter.setNdefPushMessageCallback(
-                                        new NfcAdapter.CreateNdefMessageCallback() {
-                                            public NdefMessage createNdefMessage(NfcEvent event) {
-                                               return new NFCService(getApplicationContext(),position,bCard).createMessage();
-                                            }
-                                        }, CardsActivity.this);
-
-
-
-                            }
-                        }).show();*/
                 AlertDialog.Builder builder = new AlertDialog.Builder(CardsActivity.this);
                 builder.setTitle("Choose Action:");
                 builder.setItems(new CharSequence[]
@@ -270,6 +209,8 @@ public class CardsActivity extends AppCompatActivity{
 
                                         break;
                                     case 1:
+                                        //START
+                                        //SEnd selected card to NFC
                                        // Toast.makeText(getApplicationContext(), "clicked 2:"+b.getName(), Toast.LENGTH_SHORT).show();
                                       //  Toast.makeText(CardsActivity.this, "share", Toast.LENGTH_SHORT).show();
 //                                Intent intent = new Intent(Intent.ACTION_SEND, Uri.parse("tel:"));
@@ -281,7 +222,7 @@ public class CardsActivity extends AppCompatActivity{
                                         nfcAdapter.setNdefPushMessageCallback(
                                                 new NfcAdapter.CreateNdefMessageCallback() {
                                                     public NdefMessage createNdefMessage(NfcEvent event) {
-
+//We calling NFCS
                                                         return new NFCService(getApplicationContext(), position, b).createMessage();
                                                     }
                                                 }, CardsActivity.this);
@@ -291,7 +232,7 @@ public class CardsActivity extends AppCompatActivity{
                                         Toast.makeText(getApplicationContext(),"NFC ERROR ",Toast.LENGTH_LONG).show();
                                     }
 
-
+//END
                                             break;
                                     case 2:
                                         //Toast.makeText(getApplicationContext(), "clicked 3:"+b.getName(), Toast.LENGTH_SHORT).show();
