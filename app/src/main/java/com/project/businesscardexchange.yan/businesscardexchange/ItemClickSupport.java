@@ -3,8 +3,6 @@ package com.project.businesscardexchange.yan.businesscardexchange;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
-import com.project.businesscardexchange.R;
-
 //Prabin Silwal
 public class ItemClickSupport {
     private final RecyclerView mRecyclerView;

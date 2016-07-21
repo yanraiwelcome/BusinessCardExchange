@@ -12,7 +12,7 @@ import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.View;
 
-import com.project.businesscardexchange.R;
+import  com.project.businesscardexchange.yan.businesscardexchange.R;
 import com.project.businesscardexchange.yan.businesscardexchange.sdk.cache.Cache;
 import com.project.businesscardexchange.yan.businesscardexchange.ui.common.BaseActivity;
 import com.project.businesscardexchange.yan.businesscardexchange.ui.common.FragmentAdapter;

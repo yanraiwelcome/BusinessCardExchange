@@ -39,7 +39,7 @@ import com.dd.morphingbutton.MorphingButton;
 import com.github.silvestrpredko.dotprogressbar.DotProgressBar;
 import com.project.businesscardexchange.yan.businesscardexchange.MainActivity;
 import com.project.businesscardexchange.yan.businesscardexchange.MyApplication;
-import com.project.businesscardexchange.R;
+import  com.project.businesscardexchange.yan.businesscardexchange.R;
 import com.project.businesscardexchange.yan.businesscardexchange.models.BusinessCard;
 import com.project.businesscardexchange.yan.businesscardexchange.ui.WifiFilehelper;
 import com.project.businesscardexchange.yan.businesscardexchange.utils.DBHelper;

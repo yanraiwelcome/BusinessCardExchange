@@ -8,7 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.project.businesscardexchange.R;
+import  com.project.businesscardexchange.yan.businesscardexchange.R;
 
 
 /**

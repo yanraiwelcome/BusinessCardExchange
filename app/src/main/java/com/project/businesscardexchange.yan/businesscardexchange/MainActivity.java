@@ -29,7 +29,7 @@ import android.widget.Toast;
 
 import com.flaviofaria.kenburnsview.KenBurnsView;
 import com.google.gson.Gson;
-import com.project.businesscardexchange.R;
+import  com.project.businesscardexchange.yan.businesscardexchange.R;
 import com.project.businesscardexchange.yan.businesscardexchange.fragments.ProfileActivity;
 import com.project.businesscardexchange.yan.businesscardexchange.models.BusinessCard;
 import com.project.businesscardexchange.yan.businesscardexchange.models.BusinessCardRealm;

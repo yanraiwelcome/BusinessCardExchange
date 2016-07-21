@@ -13,7 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.project.businesscardexchange.R;
+import  com.project.businesscardexchange.yan.businesscardexchange.R;
 import com.project.businesscardexchange.yan.businesscardexchange.ui.setting.view.ReceivedAppAdapter;
 import com.project.businesscardexchange.yan.businesscardexchange.ui.uientity.CardInfo;
 import com.project.businesscardexchange.yan.businesscardexchange.ui.uientity.IInfo;

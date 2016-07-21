@@ -10,7 +10,7 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
-import com.project.businesscardexchange.R;
+import  com.project.businesscardexchange.yan.businesscardexchange.R;
 import com.project.businesscardexchange.yan.businesscardexchange.ui.uientity.LocationPoint;
 
 

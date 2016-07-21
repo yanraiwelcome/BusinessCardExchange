@@ -25,7 +25,6 @@ import android.widget.Toast;
 import com.guo.duoduo.p2pmanager.p2pconstant.P2PConstant;
 import com.guo.duoduo.p2pmanager.p2pcore.P2PManager;
 import com.guo.duoduo.p2pmanager.p2pentity.P2PFileInfo;
-import com.project.businesscardexchange.R;
 import com.project.businesscardexchange.yan.businesscardexchange.adapters.SongAdapter;
 import com.project.businesscardexchange.yan.businesscardexchange.models.BusinessCard;
 import com.project.businesscardexchange.yan.businesscardexchange.sdk.cache.Cache;

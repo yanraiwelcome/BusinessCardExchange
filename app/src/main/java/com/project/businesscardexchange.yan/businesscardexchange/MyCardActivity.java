@@ -34,7 +34,7 @@ import com.flaviofaria.kenburnsview.KenBurnsView;
 import com.google.gson.Gson;
 import com.guo.duoduo.p2pmanager.p2pconstant.P2PConstant;
 import com.guo.duoduo.p2pmanager.p2pentity.P2PFileInfo;
-import com.project.businesscardexchange.R;
+import  com.project.businesscardexchange.yan.businesscardexchange.R;
 import com.project.businesscardexchange.yan.businesscardexchange.models.BusinessCard;
 import com.project.businesscardexchange.yan.businesscardexchange.models.BusinessCardRealm;
 import com.project.businesscardexchange.yan.businesscardexchange.sdk.cache.Cache;

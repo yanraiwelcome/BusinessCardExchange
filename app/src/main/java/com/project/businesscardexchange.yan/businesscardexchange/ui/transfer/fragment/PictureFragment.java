@@ -20,7 +20,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 
-import com.project.businesscardexchange.R;
+import  com.project.businesscardexchange.yan.businesscardexchange.R;
 import com.project.businesscardexchange.yan.businesscardexchange.constant.Constant;
 import com.project.businesscardexchange.yan.businesscardexchange.sdk.cache.Cache;
 import com.project.businesscardexchange.yan.businesscardexchange.ui.transfer.view.ImageSelectAdapter;

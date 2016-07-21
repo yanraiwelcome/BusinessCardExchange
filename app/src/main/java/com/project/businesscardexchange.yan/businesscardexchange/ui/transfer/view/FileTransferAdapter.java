@@ -10,7 +10,7 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.project.businesscardexchange.R;
+import  com.project.businesscardexchange.yan.businesscardexchange.R;
 import com.project.businesscardexchange.yan.businesscardexchange.sdk.cache.Cache;
 import com.project.businesscardexchange.yan.businesscardexchange.utils.DeviceUtils;
 import com.guo.duoduo.p2pmanager.p2pconstant.P2PConstant;

@@ -16,7 +16,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.project.businesscardexchange.yan.businesscardexchange.MyApplication;
-import com.project.businesscardexchange.R;
+import  com.project.businesscardexchange.yan.businesscardexchange.R;
 import com.project.businesscardexchange.yan.businesscardexchange.constant.Constant;
 import com.project.businesscardexchange.yan.businesscardexchange.sdk.accesspoint.AccessPointManager;
 import com.project.businesscardexchange.yan.businesscardexchange.sdk.cache.Cache;

@@ -8,7 +8,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 
-import com.project.businesscardexchange.R;
+import  com.project.businesscardexchange.yan.businesscardexchange.R;
 import com.project.businesscardexchange.yan.businesscardexchange.ui.common.BaseActivity;
 import com.project.businesscardexchange.yan.businesscardexchange.ui.common.FragmentAdapter;
 import com.project.businesscardexchange.yan.businesscardexchange.ui.setting.fragment.ReceivedApp;

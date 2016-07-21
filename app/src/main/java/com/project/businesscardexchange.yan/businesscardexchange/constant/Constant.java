@@ -2,7 +2,7 @@ package com.project.businesscardexchange.yan.businesscardexchange.constant;
 
 
 import com.project.businesscardexchange.yan.businesscardexchange.MyApplication;
-import com.project.businesscardexchange.R;
+import  com.project.businesscardexchange.yan.businesscardexchange.R;
 
 
 /**

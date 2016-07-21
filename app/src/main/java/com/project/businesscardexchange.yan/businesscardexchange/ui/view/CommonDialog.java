@@ -17,7 +17,7 @@ import android.widget.LinearLayout.LayoutParams;
 import android.widget.TextView;
 
 import com.project.businesscardexchange.yan.businesscardexchange.MyApplication;
-import com.project.businesscardexchange.R;
+import  com.project.businesscardexchange.yan.businesscardexchange.R;
 
 public class CommonDialog extends Dialog implements DialogInterface {
     private Context mContext;

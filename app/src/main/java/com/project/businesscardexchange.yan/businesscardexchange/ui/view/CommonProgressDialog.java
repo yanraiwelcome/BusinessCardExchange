@@ -6,7 +6,7 @@ import android.content.Context;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.project.businesscardexchange.R;
+import  com.project.businesscardexchange.yan.businesscardexchange.R;
 
 
 public class CommonProgressDialog extends Dialog {
