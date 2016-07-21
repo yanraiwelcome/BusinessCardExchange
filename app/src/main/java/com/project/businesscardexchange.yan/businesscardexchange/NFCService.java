@@ -32,7 +32,7 @@ public class NFCService{
 
    public   NdefMessage createMessage(){
 
-        String mimeType = "application/com.project.businesscardexchange";
+        String mimeType = "application/com.project.businesscardexchange.yan.businesscardexchange";
         byte[] mimeBytes = mimeType.getBytes(Charset.forName("US-ASCII"));
 
         //GENERATE PAYLOAD
@@ -89,7 +89,7 @@ public class NFCService{
                                    mimeBytes,
                                    null,
                                    payLoad2),
-                           NdefRecord.createApplicationRecord("com.project.businesscardexchange")
+                           NdefRecord.createApplicationRecord("com.project.businesscardexchange.yan.businesscardexchange")
                    });
 
        }
@@ -108,7 +108,7 @@ public class NFCService{
                                    mimeBytes,
                                    null,
                                    payLoad2),
-                           NdefRecord.createApplicationRecord("com.project.businesscardexchange")
+                           NdefRecord.createApplicationRecord("com.project.businesscardexchange.yan.businesscardexchange")
                    });
        }
 

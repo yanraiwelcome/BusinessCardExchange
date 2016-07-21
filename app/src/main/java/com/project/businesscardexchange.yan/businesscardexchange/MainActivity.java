@@ -231,7 +231,7 @@ DBHelper myDbHelper;
 
     private NdefMessage createMessage() {
 
-        String mimeType = "application/com.project.businesscardexchange";
+        String mimeType = "application/com.project.businesscardexchange.yan.businesscardexchange";
         byte[] mimeBytes = mimeType.getBytes(Charset.forName("US-ASCII"));
 
         //GENERATE PAYLOAD
@@ -290,7 +290,7 @@ DBHelper myDbHelper;
                                     mimeBytes,
                                     null,
                                     payLoad2),
-                            NdefRecord.createApplicationRecord("com.project.businesscardexchange")
+                            NdefRecord.createApplicationRecord("com.project.businesscardexchange.yan.businesscardexchange")
                     });
         }
         else
@@ -308,7 +308,7 @@ DBHelper myDbHelper;
                                     mimeBytes,
                                     null,
                                     payLoad2),
-                            NdefRecord.createApplicationRecord("com.project.businesscardexchange")
+                            NdefRecord.createApplicationRecord("com.project.businesscardexchange.yan.businesscardexchange")
                     });
         }
 

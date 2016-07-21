@@ -118,7 +118,7 @@ public class MyCardActivity extends AppCompatActivity {
     public static final String COUNTRY_NAME = "country_name";
     private NdefMessage createMessage() {
 
-        String mimeType = "application/com.project.businesscardexchange";
+        String mimeType = "application/com.project.businesscardexchange.yan.businesscardexchange";
         byte[] mimeBytes = mimeType.getBytes(Charset.forName("US-ASCII"));
 
         //GENERATE PAYLOAD
@@ -180,7 +180,7 @@ public class MyCardActivity extends AppCompatActivity {
                                     mimeBytes,
                                     null,
                                     payLoad2),
-                            NdefRecord.createApplicationRecord("com.project.businesscardexchange")
+                            NdefRecord.createApplicationRecord("com.project.businesscardexchange.yan.businesscardexchange")
                     });
         }
         else
@@ -200,7 +200,7 @@ public class MyCardActivity extends AppCompatActivity {
                                     mimeBytes,
                                     null,
                                     payLoad2),
-                            NdefRecord.createApplicationRecord("com.project.businesscardexchange")
+                            NdefRecord.createApplicationRecord("com.project.businesscardexchange.yan.businesscardexchange")
                     });
         }
 
@@ -318,7 +318,7 @@ public class MyCardActivity extends AppCompatActivity {
                                         break;
                                */     case 1:
                                         //Toast.makeText(getApplicationContext(), "clicked 3:"+b.getName(), Toast.LENGTH_SHORT).show();
-                                       /* Intent gotoWifi = new Intent(CardsActivity.this, com.project.businesscardexchange.ui.main.MainActivity.class);
+                                       /* Intent gotoWifi = new Intent(CardsActivity.this,com.project.businesscardexchange.yan.businesscardexchange.ui.main.MainActivity.class);
                                         gotoWifi.putExtra("type","shareCard");
                                         //gotoWifi.putExtra("card",b);
                                         startActivity(gotoWifi);*/

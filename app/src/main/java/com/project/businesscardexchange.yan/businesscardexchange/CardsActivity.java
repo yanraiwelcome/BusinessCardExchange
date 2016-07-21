@@ -125,7 +125,7 @@ public class CardsActivity extends AppCompatActivity{
 
                // Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                     //    .setAction("Action", null).show();
-                /*Intent gotoWifi = new Intent(CardsActivity.this, com.project.businesscardexchange.ui.main.MainActivity.class);
+                /*Intent gotoWifi = new Intent(CardsActivity.this, com.project.businesscardexchange.yan.businesscardexchange.ui.main.MainActivity.class);
                 gotoWifi.putExtra("type","receive");
                 startActivity(gotoWifi);*/
                 Cache.selectedList.clear();
@@ -237,7 +237,7 @@ public class CardsActivity extends AppCompatActivity{
                                             break;
                                     case 2:
                                         //Toast.makeText(getApplicationContext(), "clicked 3:"+b.getName(), Toast.LENGTH_SHORT).show();
-                                       /* Intent gotoWifi = new Intent(CardsActivity.this, com.project.businesscardexchange.ui.main.MainActivity.class);
+                                       /* Intent gotoWifi = new Intent(CardsActivity.this, com.project.businesscardexchange.yan.businesscardexchange.ui.main.MainActivity.class);
                                         gotoWifi.putExtra("type","shareCard");
                                         //gotoWifi.putExtra("card",b);
                                         startActivity(gotoWifi);*/
