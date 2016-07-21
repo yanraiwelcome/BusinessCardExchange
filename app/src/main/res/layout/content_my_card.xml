@@ -6,7 +6,7 @@
     xmlns:custom="http://schemas.android.com/tools"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.project.businesscardexchange.MyCardActivity"
+    tools:context=".yan.businesscardexchange.MyCardActivity"
     tools:showIn="@layout/activity_my_card"
     android:id="@+id/nested_scroll_view_id">
 

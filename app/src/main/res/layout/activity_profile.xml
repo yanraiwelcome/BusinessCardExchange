@@ -5,6 +5,6 @@
     android:layout_height="match_parent"
 
     android:id="@+id/profile_activity_container"
-    tools:context="com.project.businesscardexchange.fragments.ProfileActivity">
+    tools:context=".yan.businesscardexchange.fragments.ProfileActivity">
 
 </RelativeLayout>

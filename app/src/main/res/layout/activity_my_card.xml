@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="com.project.businesscardexchange.MyCardActivity"
+    tools:context=".yan.businesscardexchange.MyCardActivity"
     android:background="@color/blue_900">
 
     <android.support.design.widget.AppBarLayout
