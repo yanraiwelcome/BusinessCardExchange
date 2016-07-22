@@ -45,7 +45,7 @@ public class DeviceUtils {
         File data = Environment.getDataDirectory();
         FileChannel source=null;
         FileChannel destination=null;
-        String currentDBPath = "/data/"+ "com.project.businesscardexchange" +"/databases/"+DBHelper.DATABASE_NAME;
+        String currentDBPath = "/data/"+ "com.project.businesscardexchange.yan.businesscardexchange" +"/databases/"+DBHelper.DATABASE_NAME;
         String backupDBPath = DBHelper.DATABASE_NAME;
         File currentDB = new File(data, currentDBPath);
         File backupDB = new File(sd, backupDBPath);
